@@ -20,43 +20,21 @@
             <artifactId>hotel_model</artifactId>
             <version>${project.version}</version>
         </dependency>
-    </dependencies>
-    <!--添加end-->
-    <dependencies>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-
-        <!--添加start-->
-        <!--添加对mytest-model的依赖-->
-        <dependency>
-            <groupId>cn.myhotel</groupId>
-            <artifactId>hotel_model</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <!--添加对mytest-dao的依赖-->
-        <dependency>
-            <groupId>cn.myhotel</groupId>
-            <artifactId>hotel_business</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>cn.myhotel</groupId>
-            <artifactId>hotel_service_api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <!--添加end-->
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.6</version>
         </dependency>
-
     </dependencies>
+    <!--添加end-->
+
 
 
 
