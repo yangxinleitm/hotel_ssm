@@ -2,3 +2,4 @@
 hotel_model/target/*
 hotel_service_api/target/*
 hotel_business/target/*
+.gitignore
