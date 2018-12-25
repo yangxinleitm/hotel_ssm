@@ -61,8 +61,7 @@ public class CustomerInfoController {
         return pager;
     }
 
-
-
+    
     private Map<String,Object> getSearchParam(HttpServletRequest request) {
         Map <String, Object> param = new HashMap <>();
         String pageSize = request.getParameter("pageSize");
@@ -104,4 +103,5 @@ public class CustomerInfoController {
         }
         return param;
     }
+
 }
