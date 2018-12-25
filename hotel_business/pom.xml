@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>hotel_ssm</artifactId>
+        <groupId>cn.myhotel</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>hotel_business</artifactId>
+
+    <!--配置文件-->
+    <packaging>jar</packaging>
+    <!--添加对mytest-model的依赖-->
+    <dependencies>
+        <dependency>
+            <groupId>cn.myhotel</groupId>
+            <artifactId>hotel_model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+    <!--添加end-->
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!--添加start-->
+        <!--添加对mytest-model的依赖-->
+        <dependency>
+            <groupId>cn.myhotel</groupId>
+            <artifactId>hotel_model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--添加对mytest-dao的依赖-->
+        <dependency>
+            <groupId>cn.myhotel</groupId>
+            <artifactId>hotel_business</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.myhotel</groupId>
+            <artifactId>hotel_service_api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--添加end-->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.6</version>
+        </dependency>
+
+    </dependencies>
+
+
+
+
+</project>

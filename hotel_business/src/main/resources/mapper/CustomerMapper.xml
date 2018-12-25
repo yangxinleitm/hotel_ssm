@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hotel.business.CustomerMapper">
+  <resultMap id="customerMap" type="cn.hotel.entity.CustomerDto">
+    <id column="user_id"  property="userId"/>
+    <result column="user_name"  property="userName"/>
+    <result column="user_pwd" property="userPassword"/>
+    <result column="user_realname"  property="userRealName"/>
+    <result column="isVip"  property="isVip"/>
+    <result column="user_sex"  property="usrSex"/>
+    <result column="user_birthday"  property="userBirthday"/>
+    <result column="user_nation"    property="userNation"/>
+    <result column="user_idcard"    property="userIdCard"/>
+    <result column="user_mobile"    property="userMobile"/>
+    <result column="user_address"  property="address"/>
+    <result column="user_idcardType"  property="userIdCardType"/>
+    <result column="user_ispostion"  property="userIspostion"/>
+    <result column="user_postType"  property="postType"/>
+    <result column="create_time"  property="createTime"/>
+    <result column="modify_time"  property="modifyTime"/>
+  </resultMap>
+
+  <sql id="whereParam">
+    <if test="userId !=null ">
+      AND user_id = #{userId}
+    </if>
+    <if test="userMobile !=null">
+      AND user_mobile = #{userMobile}
+    </if>
+    <if test="isVip !=null">
+      AND isVip = #{isVip}
+    </if>
+    <if test="createTimeStart != null" >
+      AND create_time &gt;= #{createTimeStart,jdbcType=BIGINT}
+    </if>
+    <if test="createTimeEnd != null" >
+      AND create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
+    </if>
+
+  </sql>
+
+  <select id="selectAllCustomer" parameterType="java.util.Map" resultMap="customerMap">
+    SELECT user_id,user_name,user_pwd,user_realname,isVip,user_sex,user_birthday,user_nation,user_idcard,user_mobile,user_address,user_idcardType,user_ispostion,user_postType,create_time,modify_time
+    FROM customer
+    <where>
+      <include refid="whereParam"/>
+    </where>
+    ORDER BY create_time DESC
+    limit #{pageNumber},#{pageSize}
+  </select>
+
+  <select id="countCustomerInfoRecord" resultType="java.lang.Long">
+      SELECT COUNT(*)
+      FROM customer
+  </select>
+
+
+</mapper>

@@ -1,0 +1,5 @@
+cn\hotel\entity\Student.class
+cn\hotel\entity\model\CustomerInfoResponse.class
+cn\hotel\entity\model\CustomerInfoRequest.class
+cn\hotel\entity\CustomerDto.class
+cn\hotel\entity\model\PagerModel.class

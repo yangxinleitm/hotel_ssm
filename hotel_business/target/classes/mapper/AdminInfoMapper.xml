@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hotel.business.AdminInfoMapper">
+  <resultMap id="adminInfoMap" type="cn.hotel.entity.AdminDto">
+    <id column="admin_id"  property="adminId"/>
+    <result column="admin_name"  property="adminName"/>
+    <result column="admin_pwd" property="adminPwd"/>
+    <result column="admin_realname"  property="adminRealName"/>
+    <result column="admin_sex"  property="adminSex"/>
+    <result column="admin_birthday"  property="adminBirthday"/>
+    <result column="admin_nation"    property="adminNation"/>
+    <result column="admin_idcard"    property="adminIdCard"/>
+    <result column="admin_mobile"    property="adminMobile"/>
+    <result column="admin_address"  property="address"/>
+    <result column="admin_idcardType"  property="adminIdCardType"/>
+    <result column="admin_ispostion"  property="adminIsPostion"/>
+    <result column="admin_postType"  property="adminPostType"/>
+    <result column="create_time"  property="createTime"/>
+    <result column="modify_time"  property="modifyTime"/>
+  </resultMap>
+
+  <!--时间区间 左闭右开-->
+  <sql id="whereParam">
+    <if test="adminId !=null ">
+      AND admin_id = #{adminId,jdbcType=BIGINT}
+    </if>
+    <if test="adminMobile !=null">
+      AND admin_mobile = #{adminMobile,jdbcType=VARCHAR}
+    </if>
+    <if test="createTimeStart != null" >
+      AND create_time &gt;= #{createTimeStart,jdbcType=BIGINT}
+    </if>
+    <if test="createTimeEnd != null" >
+      AND create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
+    </if>
+
+  </sql>
+
+  <select id="selectAllAdminInfo" parameterType="cn.hotel.entity.AdminDto" resultMap="adminInfoMap">
+    SELECT *
+    FROM admin
+    <where>
+      <include refid="whereParam"/>
+    </where>
+    ORDER BY create_time DESC
+    limit #{pageNumber,jdbcType=BIGINT},#{pageSize,jdbcType=BIGINT}
+  </select>
+
+  <select id="countAdminInfo" resultType="java.lang.Long">
+      SELECT COUNT(1)
+      FROM admin
+  </select>
+
+
+
+
+
+</mapper>
