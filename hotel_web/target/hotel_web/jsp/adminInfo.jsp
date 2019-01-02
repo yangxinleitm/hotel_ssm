@@ -22,6 +22,7 @@
         <th field="adminIdCard" align="center" width="12%">身份证</th>
         <th field="adminMobile" align="center" width="8%">手机号</th>
         <th field="adminIdCardType" align="center" width="7%" formatter="showUserIdCardType">身份证类型</th>
+        <th field="adminIsPostion" align="center" width="7%"  formatter="showAdminPostion">是否在岗</th>
         <th field="createTime" align="center" width="11%" formatter="timeStamp2DateTime">创建时间</th>
         <th field="modifyTime" align="center" width="11%" formatter="timeStamp2DateTime">修改时间</th>
         <th field="option" align="center" width="9%">操作</th>
@@ -34,7 +35,7 @@
         <input type="hidden" name="pageNumber" id="pageNumber" />
         <div width="100%" style="margin:4px">
             管理员ID:<input type="text" id="searchAdminId" name="searchAdminId" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
-            管理员编号:<input type="text" id="searchMobile" name="searchMobile" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
+            管理员手机号:<input type="text" id="searchMobile" name="searchMobile" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
             创建时间：<input class="easyui-datebox" id="createTimeStart" name="createTimeStart" type="text" editable="false"> --
             <input class="easyui-datebox" id="crateTimeEnd" name="crateTimeEnd" type="text" editable="false">&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="btnSearch()">查询</a>
@@ -42,7 +43,8 @@
         <div width="100%" style="margin:4px">
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">新增管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-add" onclick="btnModify()">修改管理员信息</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-edit" onclick="btnVerify()">删除</a>&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-add" onclick="exportFile()">导出数据</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-edit" onclick="btnDelete()">删除</a>&nbsp;&nbsp;
         </div>
     </form>
 </div>
@@ -62,12 +64,63 @@
             <tr>
                 <td style="font-size: 12px"><span class="radioSpan">&nbsp;&nbsp;&nbsp;&nbsp;性别:
                     <input type="radio" name="isSame" value="1">男</input>
-                    <input type="radio" id="radioDefault" name="isSame" value="0" checked>女</input>
+                    <input type="radio" id="radioDefault1" name="isSame" value="0" checked>女</input>
                 </span>
                 </td>
             </tr> <tr><td></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证类型:
                 <select class="easyui-combobox" id="adminIdType"  name="adminIdType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected></option>
+                    <option value="0" selected>身份证</option>
+                    <option value="1">护照</option>
+                    <option value="2">军官证</option>
+                    <option value="3">士兵证</option>
+                    <option value="4">回乡证</option>
+                    <option value="5">户口本</option>
+                    <option value="6">外国护照</option>
+                    <option value="7">台胞证</option>
+                    <option value="8">其他</option>
+                </select></td>
+            </tr><tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;民族:
+                <select class="easyui-combobox" id="modifyAdminNation"  name="modifyAdminNation"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected></option>
+                    <option value=1>汉族</option>
+                    <option value=2>壮族</option>
+                </select></td>
+            </tr><tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;手机号:<input type="text" id="modifyAdminMobile" name="modifyAdminPwd" class="easyui-textbox  easyui-validatebox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;创建时间：<input class="easyui-datebox" id="modifyCreateTime" name="modifyCreateTime" type="text" editable="false"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;家庭住址:<input type="text" id="modifyAdminAdress" name="modifyAdminAdress" class="easyui-textbox  easyui-validatebox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+        </table>
+    </form>
+</div>
+<div id="dlgAdminDetail-buttons">
+    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-left: 150px;" onclick="btnsave()" iconcls="icon-save">确认</a>
+    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-right: 150px;" onclick="javascript:$('#dgAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
+</div>
+
+
+
+<!------------------点击修改按钮，显示修改的弹窗---------------------------------->
+<div id="dgModifyDetail" class="easyui-dialog" title="修改页面" width="480px" height="490px" closed="true" buttons="#dlgModifyDetail-buttons"  style="padding:10px" modal="true">
+    <form id="formModifyDetail" method="post">
+        <table align="center" width="90%" cellpadding="2" cellspacing="2">
+            <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员ID:<input type="text" id="modifyAdminId" name="adminId" class="easyui-textbox" missingMessage="请输入管理员ID"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员呢称:<input type="text" id="modifyAdminName" name="adminName" class="easyui-textbox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;设置密码:<input type="text" id="modifyPassword" name="adminPwd" class="easyui-textbox" missingMessage="请设置密码"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;真实姓名:<input type="text" id="modifyAdminRealName" name="adminPwd" class="easyui-textbox" missingMessage="请输入真实姓名"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证:<input type="text" id="modifyAdminIdCard" name="adminPwd" class="easyui-textbox" missingMessage="请输入身份证"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr>
+                <td style="font-size: 12px"><span class="radioSpan">&nbsp;&nbsp;&nbsp;&nbsp;性别:
+                    <input type="radio" name="isSame" value="1">男</input>
+                    <input type="radio" id="radioDefault" name="isSame" value="0" checked>女</input>
+                </span>
+                </td>
+            </tr> <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证类型:
+                <select class="easyui-combobox" id="modifyAdminIdType"  name="adminIdType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected></option>
                     <option value="0" selected>身份证</option>
                     <option value="1">护照</option>
@@ -93,12 +146,10 @@
         </table>
     </form>
 </div>
-<div id="dlgAdminDetail-buttons">
+<div id="dlgModifyDetail-buttons">
     <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-left: 150px;" onclick="btnsave()" iconcls="icon-save">确认</a>
     <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-right: 150px;" onclick="javascript:$('#dgAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
 </div>
-
-
 
 
 
@@ -183,7 +234,6 @@
         var adminIdCard = $("#adminIdCard").val();
         var adminIdType = $("#adminIdType").combobox("getValue");
         var adminNation = $("#adminNation").combobox("getValue");
-        var adminName = $("#adminMobile").val();
         var createTime = $("#createTime").datebox("getValue");
         var adminAdress = $("#adminAdress").val();
 
@@ -198,11 +248,88 @@
 
     }
 
+    //修改操作
+    function btnModify() {
+        $("#dgModify").form('clear');        //每次新增之前，清空原数据
+        $('#dgModifyDetail').dialog("open").window("center");
+    }
+
 
     //查询按钮
     function btnSearch() {
         datagridBind();
     }
+
+
+    //数据导出操作
+    function exportFile() {
+        var adminId = $("#adminId").val();
+        var mobile = $("#searchMobile").val();
+        var createStartTime = $("#createTimeStart").datebox("getValue");
+        var createTimeEnd = $("#crateTimeEnd").datebox("getValue")
+
+        $.messager.confirm("提示", "请问您是否确认将数据全部导出？", function (r) {
+            if (r) {
+                $.post("/htm/exportAdminUserInfoFile.action", {},
+                    function (data) {
+                        $.messager.progress('close');
+                        if (data.status) {
+                            if (data.result != null) {
+                                $.messager.alert("信息", "导出成功，请于 2分钟内 点击 <a href='" + data.result + "'>下载</a> 对账失败记录。", "info");
+                            }
+                        } else {
+                            var message = "导出失败！";
+                            if (data.message != null) {
+                                message = data.message;
+                            }
+                            $.messager.alert("信息", message, "error");
+                        }
+                    }, "json");
+            }
+        });
+    }
+
+
+    //删除操作 只能删除 离职岗位 管理员信息
+    function btnDelete() {
+        var row = $("#dg").datagrid("getSelected");
+        if(row){
+            var adminId = row.adminId.toString();
+            var adminIsPostion = row.adminIsPostion.toString();
+            if(adminIsPostion !="" && adminIsPostion=="0"){
+                $.messager.confirm("提示", "是否确认删除此离职员工的记录？", function (r) {
+                    if (r) {
+                        $.post("/htm/adminInfoDelete.action", {adminId:adminId,adminIsPostion:adminIsPostion},
+                            function (data) {
+                                if (data.status) {
+                                    $.messager.alert("信息", "删除离职员工成功", "info", function () {
+                                  //      $('#dgUpdateBlackList').dialog("close");
+                                        datagridBind();
+                                    });
+                                } else {
+                                    var message1 = "删除离职员工失败";
+                                    if (data.message != null) {
+                                        message = data.message;
+                                        $("#errMsg").text(message);
+                                    }else{
+                                        $("#errMsg").text(message1);
+                                    }
+                                }
+                            }, "json");
+                    }
+                });
+            }else{
+                $.messager.alert("信息","在职岗位不能为空，请重新进行选择！","info");
+                return;
+            }
+        }else{
+            $.messager.alert("信息","请选择需要进行的操作！","info");
+            return;
+        }
+    }
+
+
+
 
 
     //获取n天前 yyyy-MM-dd
@@ -234,6 +361,17 @@
         return value;
     }
 
+    //是否在岗
+    function showAdminPostion(value) {
+        if(value ==1) {
+            return "在岗";
+        }else if(value ==0){
+            return "离职";
+        }else{
+            return value;
+        }
+
+    }
 
 
     //对时间进行格式化

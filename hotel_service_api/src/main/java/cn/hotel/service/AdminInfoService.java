@@ -11,5 +11,8 @@ public interface AdminInfoService {
 
     //查询总的数据
     public RestModel countAdminInfoRecord(AdminInfoRequest request);
+
+    //删除离职员工的数据
+    public RestModel deleteAdminInfoRecord(Map<String,Object> map);
 }
 

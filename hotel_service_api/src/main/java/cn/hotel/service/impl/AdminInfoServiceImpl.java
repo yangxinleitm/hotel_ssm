@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AdminInfoServiceImpl implements AdminInfoService {
@@ -44,6 +45,26 @@ public class AdminInfoServiceImpl implements AdminInfoService {
     @Override
     public RestModel countAdminInfoRecord(AdminInfoRequest request) {
         Long count = adminInfoMapper.countAdminInfo(request);
+        restModel.setCode(SysResponse.RECORD_CODE.RESPONSE_SUCCESS.get().toString());
+        restModel.setMessage(SysResponse.RECORD_MESSAGE.RESPONSE_SUCCESS_MESSAGE.get());
+        restModel.setData(count);
+        return restModel;
+    }
+
+
+    //删除
+    @Override
+    public RestModel deleteAdminInfoRecord(Map<String, Object> map) {
+        if(map.get("adminId").toString()==null && !StringUtils.isNotBlank(map.get("adminId").toString())){
+            restModel.setCode(SysResponse.RECORD_CODE.PARAM_ISIMPTY.get().toString());
+            restModel.setMessage(SysResponse.RECORD_MESSAGE.PARAM_ISIMPTY_MESSAGE.get());
+            return restModel;
+        }else if(map.get("adminIsPostion") ==null && !StringUtils.isNotBlank(map.get("adminIsPostion").toString())){
+            restModel.setCode(SysResponse.RECORD_CODE.PARAM_ISIMPTY.get().toString());
+            restModel.setMessage(SysResponse.RECORD_MESSAGE.PARAM_ISIMPTY_MESSAGE.get());
+            return restModel;
+        }
+        Long count = adminInfoMapper.deleteAdminInfoByPrimKey(map);
         restModel.setCode(SysResponse.RECORD_CODE.RESPONSE_SUCCESS.get().toString());
         restModel.setMessage(SysResponse.RECORD_MESSAGE.RESPONSE_SUCCESS_MESSAGE.get());
         restModel.setData(count);

@@ -51,7 +51,11 @@
       FROM admin
   </select>
 
-
+  <delete id="deleteAdminInfoByPrimKey" parameterType="java.util.Map">
+    DELETE
+    FROM admin
+    WHERE admin_id=#{adminId,jdbcType=BIGINT}
+  </delete>
 
 
 

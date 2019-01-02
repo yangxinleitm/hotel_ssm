@@ -2,7 +2,7 @@ package cn.hotel.business;
 
 import cn.hotel.entity.model.AdminInfoRequest;
 import cn.hotel.entity.model.AdminInfoResponse;
-
+import java.util.*;
 import java.util.List;
 
 
@@ -15,4 +15,6 @@ public interface AdminInfoMapper {
     //查询总数据
     public Long countAdminInfo(AdminInfoRequest adminInfoRequest);
 
+    //删除数据
+    public Long deleteAdminInfoByPrimKey(Map<String,Object> map);
 }
