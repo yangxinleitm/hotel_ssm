@@ -1,9 +1,11 @@
 package cn.hotel.serviceApi.test;
 import cn.hotel.entity.CustomerDto;
 import cn.hotel.entity.Enum.SysResponse;
+import cn.hotel.entity.model.CustomerInfoRequest;
 import cn.hotel.entity.model.CustomerInfoResponse;
 import cn.hotel.service.CustomerService;
 import cn.hotel.service.utils.RestModel;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,6 +36,17 @@ public class CustomerTest {
         }
 
     }
+
+
+    //客户列表展示
+    @Test
+    public void customerDetail(){
+        CustomerDto customerInfoRequest = new CustomerDto();
+        customerInfoRequest.setUserId(Long.valueOf("154203696"));
+        RestModel restModel = customerService.selectCustomerByPrimkey(customerInfoRequest);
+        System.out.println(JSON.toJSONString(restModel));
+    }
+
 
 
 

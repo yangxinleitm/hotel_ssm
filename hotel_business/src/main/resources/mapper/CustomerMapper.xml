@@ -54,5 +54,11 @@
       FROM customer
   </select>
 
+  <select id="selectCustomerByPrimkey" parameterType="cn.hotel.entity.CustomerDto" resultMap="customerMap">
+      SELECT *
+      FROM customer
+      WHERE user_id=#{userId}
+  </select>
+
 
 </mapper>

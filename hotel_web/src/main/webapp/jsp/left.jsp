@@ -58,9 +58,10 @@
             <tr valign="top" id="submenu1" style="display: none">
                 <td class="left_nav_bgshw" height="35px">
                     <ul class="page-sidebar-menu">
-                        <li class="left_nav_link"><a href="/htm/hello2.htm"  target="main"><i class="fa fa-desktop"></i></a><span style="font-size:medium;color: #2c2c2c">用户订单</span></li>
-                        <li class="left_nav_link"><a href="/htm/hello3.htm"  target="main"><i class="fa fa-bar-chart-o"></i><span style="font-size:medium;color: #2c2c2c">用户</span></a></li>
-                        <li class="left_nav_link"><a href="/htm/hello3.htm"  target="main"><i class="fa fa-bar-chart-o"></i><span style="font-size:medium;color: #2c2c2c">用户管理</span></a></li>
+                        <li class="left_nav_link"><a href="/htm/hello2.htm"  target="main"><i class="fa fa-desktop"></i></a><span style="font-size:medium;color: #2c2c2c">客户信息</span></li>
+                        <li class="left_nav_link"><a href="/htm/hello3.htm"  target="main"><i class="fa fa-bar-chart-o"></i><span style="font-size:medium;color: #2c2c2c">客户入住申请</span></a></li>
+                        <li class="left_nav_link"><a href="/htm/hello3.htm"  target="main"><i class="fa fa-bar-chart-o"></i><span style="font-size:medium;color: #2c2c2c">客户入住审核</span></a></li>
+                        <li class="left_nav_link"><a href="/htm/hello3.htm"  target="main"><i class="fa fa-bar-chart-o"></i><span style="font-size:medium;color: #2c2c2c">客户入住月报统计</span></a></li>
                     </ul>
                 </td>
             </tr>
