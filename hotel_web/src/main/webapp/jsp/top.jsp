@@ -22,7 +22,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"style="font-size: 20px;">宜家后台管理系统</a>
+            <a class="navbar-brand" href="#"style="font-size: 20px;">宜家酒店后台管理系统</a>
         </div>
 
         <ul class="nav navbar-top-links navbar-right">

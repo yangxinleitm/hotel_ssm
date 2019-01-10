@@ -51,9 +51,9 @@ Main Components
 -------------------------------- */
 .cd-accordion-menu {
   width: 99%;
-  max-width: 180px;
+  max-width: 200px;
   background: #4d5158;
-  margin: 0.5em auto;
+  margin: 0.1em auto;
   box-shadow: 0 4px 4px #4d5158;
 }
 .cd-accordion-menu ul {

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.hotel.business.HotelRoomMapper">
+  <resultMap id="roomMap" type="cn.hotel.entity.Room">
+    <id column="room_id"  property="roomId"/>
+    <result column="room_no"  property="roomNo"/>
+    <result column="room_type" property="roomType"/>
+    <result column="is_clean"  property="isClean"/>
+    <result column="is_live"  property="isLive"/>
+    <result column="room_area"  property="roomArea"/>
+    <result column="room_detail"  property="roomDetail"/>
+    <result column="is_vip"    property="isVip"/>
+    <result column="vip_price"    property="vipPrice"/>
+    <result column="create_time"    property="createTime"/>
+    <result column="modify_time"  property="modifyTime"/>
+  </resultMap>
+
+  <!--时间区间 左闭右开-->
+  <sql id="whereParam">
+    <if test="roomId !=null ">
+      AND room_id = #{roomId,jdbcType=BIGINT}
+    </if>
+    <if test="isVip !=null">
+      AND is_vip = #{isVip,jdbcType=VARCHAR}
+    </if>
+    <if test="createTimeStart != null" >
+      AND create_time &gt;= #{createTimeStart,jdbcType=BIGINT}
+    </if>
+    <if test="createTimeEnd != null" >
+      AND create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
+    </if>
+  </sql>
+
+  <select id="selectRoomInfoRecord" parameterType="java.util.Map" resultMap="roomMap">
+    SELECT *
+    FROM room
+    <where>
+      <include refid="whereParam"/>
+    </where>
+    ORDER BY create_time DESC
+    limit #{pageNumber},#{pageSize}
+  </select>
+
+  <select id="countHotelRoomInfoRecord" parameterType="java.util.Map" resultType="java.lang.Long">
+    SELECT COUNT(*)
+    FROM room
+  </select>
+
+
+</mapper>

@@ -17,25 +17,17 @@
         <input type="checkbox" name ="group-1" id="group-1" checked>
         <label for="group-1">用户管理</label>
         <ul>
-            <li><a href="/htm/user/customerInfo.action"  target="main">用户信息管理</a></li>
+            <li><a href="/htm/user/customerInfo.action"  target="main">客户信息管理</a></li>
             <li><a href="/htm/user/adminInfo.action"  target="main">管理员基本信息</a></li>
         </ul>
     </li>
-
     <%--酒店事务管理--%>
     <li class="has-children">
         <input type="checkbox" name ="group-2" id="group-2">
         <label for="group-2">酒店事务管理</label>
         <ul>
-            <li><a href="/htm/hello2.htm"  target="main">客户信息登记</a></li>
-            <li class="has-children">
-                <input type="checkbox" name ="sub-group-1" id="sub-group-1">
-                <label for="sub-group-1">客户消费记录</label>
-                <ul>
-                    <li><a href="/htm/hello3.htm"  target="main">用餐消费</a></li>
-                    <li><a href="/htm/hello3.htm"  target="main">客房消费</a></li>
-                </ul>
-            </li>
+            <li><a href="/htm/hotel/hotelRoomInfo.action"  target="main">酒店客房信息</a></li>
+            <li><a href="/htm/hotel/hotelMaterial.action"  target="main">酒店器材管理</a></li>
             <li><a href="/htm/hello3.htm"  target="main">客户入住月报统计</a></li>
         </ul>
     </li>
@@ -45,12 +37,19 @@
         <input type="checkbox" name ="group-3" id="group-3">
         <label for="group-3">财务管理</label>
         <ul>
+            <li class="has-children">
+                <input type="checkbox" name ="sub-group-1" id="sub-group-1">
+                <label for="sub-group-1">客户消费记录</label>
+                <ul>
+                    <li><a href="/htm/hello3.htm"  target="main">用餐消费</a></li>
+                    <li><a href="/htm/hello3.htm"  target="main">客房消费</a></li>
+                </ul>
+            </li>
             <li><a href="/htm/hello2.do"  target="main">客房价格管理</a></li>
             <li><a href="/htm/hello3.do"  target="main">当日收入报表</a></li>
-            <li><a href="/htm/hello3.do"  target="main">月季收入查询</a></li>
+           <%-- <li><a href="/htm/hello3.do"  target="main">月季收入查询</a></li>--%>
         </ul>
     </li>
-
 
     <%--系统基础配置--%>
     <li class="has-children">
@@ -60,15 +59,13 @@
         <ul>
             <li class="has-children">
                 <input type="checkbox" name ="sub-group-3" id="sub-group-3">
-                <label for="sub-group-3">Sub Group 3</label>
-
+                <label for="sub-group-3">首页配置</label>
                 <ul>
-                    <li><a href="#0">Image</a></li>
-                    <li><a href="#0">Image</a></li>
+                    <li><a href="#0">酒店信息更新</a></li>
+                    <li><a href="#0">客房图片更换</a></li>
                 </ul>
             </li>
-            <li><a href="#0">Image</a></li>
-            <li><a href="#0">Image</a></li>
+            <li><a href="#0">更换个人密码</a></li>
         </ul>
     </li>
 </ul>
