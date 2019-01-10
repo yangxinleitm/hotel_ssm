@@ -67,14 +67,14 @@ public class HotelRoomInfoController extends BaseController {
         if (StringUtils.isNotBlank(pageSize)) {
             param.put("pageSize",Integer.valueOf(pageSize));
         } else {
-            param.put("pageSize",50);
+            param.put("pageSize",20);
         }
         String pageNumber = request.getParameter("pageNumber");
         if (StringUtils.isNotBlank(pageNumber)) {
             if (Integer.valueOf(pageNumber) <= 1) {
                 param.put("pageNumber",0);
             } else {
-                param.put("pageNumber",Integer.valueOf(pageNumber));
+                param.put("pageNumber",(Long.valueOf(pageNumber) - 1) * Long.valueOf(pageSize));
             }
         } else {
             param.put("pageNumber",0);
@@ -84,9 +84,9 @@ public class HotelRoomInfoController extends BaseController {
             param.put("roomId",roomId);
         }
 
-        String isVip = request.getParameter("isVip");
-        if(StringUtils.isNotBlank(isVip)) {
-            param.put("isVip", isVip);
+        String searchIsVip = request.getParameter("searchIsVip");
+        if(StringUtils.isNotBlank(searchIsVip)) {
+            param.put("isVip", searchIsVip);
         }
         String createTime = request.getParameter("createTimeStart");
         if(StringUtils.isNotBlank(createTime)){

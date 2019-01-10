@@ -25,91 +25,49 @@
             <a class="navbar-brand" href="#"style="font-size: 20px;">宜家酒店后台管理系统</a>
         </div>
 
-        <ul class="nav navbar-top-links navbar-right">
+       <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-envelope fa-fw"></i> <i class="fa fa-caret-down"></i>
+                    <span style="color: white">登录人:【admin】</span>
                 </a>
             </li>
-
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-alerts">
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-comment fa-fw"></i> New Comment
-                                <span class="pull-right text-muted small">4 min</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                <span class="pull-right text-muted small">12 min</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-envelope fa-fw"></i> Message Sent
-                                <span class="pull-right text-muted small">4 min</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-tasks fa-fw"></i> New Task
-                                <span class="pull-right text-muted small">4 min</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="#">
-                            <div>
-                                <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                <span class="pull-right text-muted small">4 min</span>
-                            </div>
-                        </a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a class="text-center" href="#">
-                            <strong>See All Alerts</strong>
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" onclick="Logout();">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
-                    </li>
-                    <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
-                    </li>
-                </ul>
             </li>
         </ul>
     </nav>
 </div>
+
+<script type="text/javascript">
+    function Logout() {
+        /* $.messager.confirm("确认", "操作后将会更新对账记录对账结果为差错已处理状态，请确定是否操作？", function (r) {
+             if (r) {
+                 $.post("handleUserAccountCheckError.htm", {accountReconId : accountReconId, remark : remark}, function (data) {
+                     if (data.status) {
+                         var message = data.message;
+                         $.messager.alert("信息", message, "info");
+                         $('#dlgErrorDeal').dialog('close');
+                         $("#dealDescribe").textbox('setValue', "");
+                         datagridBind();
+                     } else {
+                         var message = data.message;
+                         $.messager.alert("信息", message, "error");
+                         $('#dlgErrorDeal').dialog('close');
+                         $("#dealDescribe").textbox('setValue', "");
+                         datagridBind();
+                     }
+                 }, "json");
+             }
+         });*/
+    }
+</script>
+
 <script src="${pageContext.request.contextPath}/jsp/assets/js/jquery-1.10.2.js"></script>
 <script src="${pageContext.request.contextPath}/jsp/assets/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/jsp/assets/js/jquery.metisMenu.js"></script>
 <script src="${pageContext.request.contextPath}/jsp/assets/js/morris/raphael-2.1.0.min.js"></script>
+
+
 </body>
 </html>

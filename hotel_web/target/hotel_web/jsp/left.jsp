@@ -28,7 +28,7 @@
         <ul>
             <li><a href="/htm/hotel/hotelRoomInfo.action"  target="main">酒店客房信息</a></li>
             <li><a href="/htm/hotel/hotelMaterial.action"  target="main">酒店器材管理</a></li>
-            <li><a href="/htm/hello3.htm"  target="main">客户入住月报统计</a></li>
+ <%--           <li><a href="/htm/hello3.htm"  target="main">客户入住月报统计</a></li>--%>
         </ul>
     </li>
 
@@ -65,7 +65,6 @@
                     <li><a href="#0">客房图片更换</a></li>
                 </ul>
             </li>
-            <li><a href="#0">更换个人密码</a></li>
         </ul>
     </li>
 </ul>

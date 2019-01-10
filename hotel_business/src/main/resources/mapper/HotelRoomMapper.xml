@@ -37,7 +37,7 @@
     <where>
       <include refid="whereParam"/>
     </where>
-    ORDER BY create_time DESC
+    ORDER BY room_id ASC
     limit #{pageNumber},#{pageSize}
   </select>
 
@@ -46,5 +46,10 @@
     FROM room
   </select>
 
+  <insert id="addHotelRoomInfoRecrd" parameterType="java.util.Map">
+    INSERT INTO
+    room(room_id,room_no,room_type,is_clean,is_live,room_area,room_detail,is_vip,vip_price,create_time,modify_time,remark)
+    VALUES (#{roomId},#{roomNo},#{roomType},#{isClean},#{isLive},#{roomArea},#{roomDetail},#{isVip},#{vipPrice},#{createTime},#{modifyTime},#{remark})
+  </insert>
 
 </mapper>

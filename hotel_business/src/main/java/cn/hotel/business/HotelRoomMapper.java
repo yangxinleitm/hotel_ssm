@@ -15,4 +15,8 @@ public interface HotelRoomMapper {
     //统计客房的所有数据
     public Long countHotelRoomInfoRecord(Map<String,Object> map);
 
+    //添加客房信息
+    public void addHotelRoomInfoRecrd(Map<String,Object> map);
+
+
 }

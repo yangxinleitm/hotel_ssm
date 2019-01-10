@@ -10,7 +10,7 @@
 <body style="margin:0px;">
 
 <table id="dg" class="easyui-datagrid" title="酒店事务管理 -- 酒店客房信息 " singleSelect="true" fitColumns="true" nowrap="false" striped="true"
-       SelectOnCheck="true" CheckOnSelect="true" rownumbers="true" pagination="true" pageSize="50" pageList="[50, 100, 200]" toolbar="#tb" fit="true">
+       SelectOnCheck="true" CheckOnSelect="true" rownumbers="true" pagination="true" pageSize="20" pageList="[20, 100, 200]" toolbar="#tb" fit="true">
     <thead>
     <tr>
         <th field="select" align="center" checkbox="true">选择</th>
@@ -34,16 +34,68 @@
         <input type="hidden" name="pageNumber" id="pageNumber" />
         <div width="100%" style="margin:4px">
             客房ID:<input type="text" id="roomId" name="roomId" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
-            是否为VIP客房:<input type="text" id="isVip" name="isVip" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
+            是否为VIP客房: <select class="easyui-combobox" id="searchIsVip"  name="searchIsVip"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+            <option value="" selected></option>
+            <option value="0">否</option>
+            <option value="1">是</option>
+        </select>&nbsp;&nbsp;&nbsp;
             创建时间：<input class="easyui-datebox" id="createTimeStart" name="createTimeStart" type="text" editable="false"> --
             <input class="easyui-datebox" id="crateTimeEnd" name="crateTimeEnd" type="text" editable="false">&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="btnSearch()">查询</a>
         </div>
         <div width="100%" style="margin:4px">
-            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">客房详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnHotelRoomDetail()">客房详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">添加客房</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-edit" onclick="btnModifyHotelRoom()">修改客房</a>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </form>
 </div>
+
+<!------------------点击新增按钮，显示新增的弹窗---------------------------------->
+<div id="dgAdminDetail" class="easyui-dialog" title="新增页面" width="420px" height="320px" closed="true" buttons="#dlgAdminDetail-buttons"  style="padding:10px" modal="true">
+    <form id="adminDetail" method="post">
+        <table align="center" width="90%" cellpadding="2" cellspacing="2">
+            <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房类型:
+                <select class="easyui-combobox" id="adminIdType4"  name="adminIdType5"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="0" selected>新建</option>
+                    <option value="1">普通大床房</option>
+                    <option value="2">普通双人床</option>
+                </select>
+            </td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否已打扫:
+                <select class="easyui-combobox" id="adminIdType"  name="adminIdType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected>全部</option>
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                </select></td>
+            </tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否已居住:
+                <select class="easyui-combobox" id="adminIdType1"  name="adminIdType1"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected>全部</option>
+                    <option value="0" selected>否</option>
+                    <option value="1">是</option>
+                </select>
+            </td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房面积:<input type="text" id="adminRealName" name="adminPwd" class="easyui-textbox" missingMessage="请输入真实姓名"validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否为VIP客房:
+                <select class="easyui-combobox" id="adminIdType2"  name="adminIdType3"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected></option>
+                    <option value="0" selected>否</option>
+                    <option value="1">是</option>
+                </select>
+            </td></tr>
+            <tr><td></td></tr>
+        </table>
+    </form>
+</div>
+<div id="dlgAdminDetail-buttons">
+    <div align="center">
+        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="btnsave()" iconcls="icon-save">确认</a>
+        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="javascript:$('#dgAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
+    </div>
+</div>
+
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
@@ -119,24 +171,6 @@
         $('#dgAdminDetail').dialog("open").window("center");
     }
     function btnsave() {
-        var adminId = $("#adminId").val();
-        var adminName = $("#adminName").val();
-        var adminPwd = $("#adminPwd").val();
-        var adminRealName = $("#adminRealName").val();
-        var adminIdCard = $("#adminIdCard").val();
-        var adminIdType = $("#adminIdType").combobox("getValue");
-        var adminNation = $("#adminNation").combobox("getValue");
-        var createTime = $("#createTime").datebox("getValue");
-        var adminAdress = $("#adminAdress").val();
-
-        //数据校验
-        if(adminId ==""){
-            $.messager.alert("信息","管理员ID不能为空，请填写完整！","info");
-            return;
-        }else if(adminName ==""){
-            $.messager.alert("信息","管理员ID不能为空，请填写完整！","info");
-            return;
-        }
 
     }
 

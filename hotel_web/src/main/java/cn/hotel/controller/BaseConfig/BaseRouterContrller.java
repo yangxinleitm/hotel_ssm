@@ -9,7 +9,7 @@ public class BaseRouterContrller {
     //配置主页面和登录页面
     @RequestMapping(value = "/htm/login.action")
     public String login(){
-        return "login";
+        return "platformLogin";
     }
     //main主界面
     @RequestMapping(value = "/htm/main.action")
@@ -26,6 +26,9 @@ public class BaseRouterContrller {
     public String left(){
         return "left";
     }
+
+
+
 
 
 }
