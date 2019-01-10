@@ -9,10 +9,9 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-    <meta http-equiv="description" content="This is my page">
-    <link href="${pageContext.request.contextPath}/css/css.css" type="text/css" rel="stylesheet" />
 </head>
 <frameset rows="60,*" cols="*" frameborder="no" border="0" framespacing="0">
+    <link href="${pageContext.request.contextPath}/css/css.css" type="text/css" rel="stylesheet" />
     <frame src="${pageContext.request.contextPath}/jsp/top.jsp" name="title" scrolling="no" noresize="noresize" >
     <frameset cols="220,*" frameborder="yes" border="2" framespacing="0">
         <frame src="${pageContext.request.contextPath}/jsp/left.jsp"  name="tree" scrolling="no" marginheight="0" marginwidth="0">
@@ -20,5 +19,9 @@
     </frameset>
 </frameset>
 <body>
+<body class="easyui-layout">
+
+
+</body>
 </body>
 </html>

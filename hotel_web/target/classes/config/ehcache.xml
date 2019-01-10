@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false" dynamicConfig="false" monitoring="autodetect">
+    <diskStore path="java.io.tmpdir" />
+    <!--
+        diskStore path:用来配置磁盘缓存使用的物理路径
+        name:    缓存名称,cache的唯一标识(ehcache会把这个cache放到HashMap里)
+        eternal="false"   元素是否永恒,如果是就永不过期(必须设置)
+        maxElementsOnDisk====磁盘缓存中最多可以存放的元素数量,0表示无穷大
+        maxElementsInMemory="1000" 内存缓存中最多可以存放的元素数量(必须设置)
+        timeToIdleSeconds="0"   导致元素过期的访问间隔(秒为单位). 0表示可以永远空闲,默认为0
+        timeToLiveSeconds="600" 元素在缓存里存在的时间(秒为单位). 0 表示永远存在不过期
+        overflowToDisk="false"  当缓存达到maxElementsInMemory值是,是否允许溢出到磁盘(必须设置)
+        diskPersistent="false"  磁盘缓存在VM重新启动时是否保持(默认为false)
+        diskExpiryThreadIntervalSeconds="100" 磁盘失效线程运行时间间隔,默认是120秒
+        memoryStoreEvictionPolicy="LFU" 内存存储与释放策略.当达到maxElementsInMemory时
+               共有三种策略,分别为LRU(最近最少使用)、LFU(最常用的)、FIFO(先进先出)默认使用"最近使用"策略
+    -->
+    <defaultCache
+            eternal="false"
+            maxElementsInMemory="3000"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="0"
+            overflowToDisk="true"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="100"
+            memoryStoreEvictionPolicy="LRU"/>
+
+    <cache name="propConfigCache"
+           eternal="false"
+           maxElementsInMemory="3000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+    <cache name="workTimeCache"
+           eternal="false"
+           maxElementsInMemory="3000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+    <cache name="threeInOneCache"
+           eternal="false"
+           maxElementsInMemory="3000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+    <cache name="transferCache"
+           eternal="false"
+           maxElementsInMemory="1000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+    <cache name="threeInOneFavCache"
+           eternal="false"
+           maxElementsInMemory="3000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+    <cache name="reserveTimeCache"
+           eternal="false"
+           maxElementsInMemory="3000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+    <cache name="mqServerNameCache"
+           eternal="false"
+           maxElementsInMemory="3000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+    <cache name="schWorkTimeCache"
+           eternal="false"
+           maxElementsInMemory="3000"
+           overflowToDisk="true"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="1440"
+           memoryStoreEvictionPolicy="LFU"/>
+
+</ehcache>

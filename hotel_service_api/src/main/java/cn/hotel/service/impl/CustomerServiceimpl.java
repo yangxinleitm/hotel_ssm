@@ -23,6 +23,7 @@ public class CustomerServiceimpl implements CustomerService {
     @Resource
     private CustomerMapper customerMapper;
 
+    @Cacheable(value = "customer",condition = "#result.userId>0")
     @Override
     public RestModel findAllCustomer(Map<String,Object> map) {
         List <CustomerInfoResponse> customerInfoResponses = customerMapper.selectAllCustomer(map);
