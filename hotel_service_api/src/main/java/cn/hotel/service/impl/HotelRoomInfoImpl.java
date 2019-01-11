@@ -3,6 +3,7 @@ package cn.hotel.service.impl;
 import cn.hotel.business.HotelRoomMapper;
 import cn.hotel.entity.Room;
 import cn.hotel.service.HotelRoomService;
+import cn.hotel.service.utils.RestModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,6 +27,16 @@ public class HotelRoomInfoImpl implements HotelRoomService {
     public Long countHotelRoomInfoRecord(Map <String, Object> map) {
         Long count = hotelRoomMapper.countHotelRoomInfoRecord(map);
         return count;
+    }
+
+    @Override
+    public RestModel addHotelRoomInfoRecrd(Map <String, Object> map) {
+        RestModel restModel = new RestModel();
+        restModel.setCode("200");
+        restModel.setMessage("成功");
+        hotelRoomMapper.addHotelRoomInfoRecrd(map);
+        restModel.setData("");
+        return restModel;
     }
 
 

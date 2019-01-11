@@ -1,16 +1,14 @@
 package cn.hotel.serviceApi.test;
 
-import cn.hotel.business.HotelMaterialMapper;
 import cn.hotel.business.HotelRoomMapper;
 import cn.hotel.entity.Room;
 import cn.hotel.service.HotelRoomService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.omg.CORBA.MARSHAL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import sun.dc.pr.PRError;
+
 
 import java.util.*;
 import java.util.HashMap;

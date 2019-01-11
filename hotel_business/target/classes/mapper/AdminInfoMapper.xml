@@ -33,7 +33,12 @@
     <if test="createTimeEnd != null" >
       AND create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
     </if>
-
+    <if test="adminName != null" >
+      AND admin_name = #{adminName,jdbcType=BIGINT}
+    </if>
+    <if test="adminPwd != null" >
+      AND admin_pwd = #{adminPwd,jdbcType=BIGINT}
+    </if>
   </sql>
 
   <select id="selectAllAdminInfo" parameterType="cn.hotel.entity.AdminDto" resultMap="adminInfoMap">

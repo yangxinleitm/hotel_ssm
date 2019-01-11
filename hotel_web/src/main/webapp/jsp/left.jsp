@@ -28,7 +28,6 @@
         <ul>
             <li><a href="/htm/hotel/hotelRoomInfo.action"  target="main">酒店客房信息</a></li>
             <li><a href="/htm/hotel/hotelMaterial.action"  target="main">酒店器材管理</a></li>
- <%--           <li><a href="/htm/hello3.htm"  target="main">客户入住月报统计</a></li>--%>
         </ul>
     </li>
 
@@ -47,24 +46,16 @@
             </li>
             <li><a href="/htm/hello2.do"  target="main">客房价格管理</a></li>
             <li><a href="/htm/hello3.do"  target="main">当日收入报表</a></li>
-           <%-- <li><a href="/htm/hello3.do"  target="main">月季收入查询</a></li>--%>
         </ul>
     </li>
 
     <%--系统基础配置--%>
     <li class="has-children">
         <input type="checkbox" name ="group-4" id="group-4">
-        <label for="group-4">系统基础配置</label>
-
+        <label for="group-4">系统权限配置</label>
         <ul>
-            <li class="has-children">
-                <input type="checkbox" name ="sub-group-3" id="sub-group-3">
-                <label for="sub-group-3">首页配置</label>
-                <ul>
-                    <li><a href="#0">酒店信息更新</a></li>
-                    <li><a href="#0">客房图片更换</a></li>
-                </ul>
-            </li>
+            <li><a href="/htm/hello2.do"  target="main">基础权限配置</a></li>
+            <li><a href="/htm/hello2.do"  target="main">功能树展示</a></li>
         </ul>
     </li>
 </ul>

@@ -1,9 +1,12 @@
 package cn.hotel.controller;
 
+import cn.hotel.controller.utils.JsonModel;
+import cn.hotel.controller.utils.RestUtils;
 import cn.hotel.entity.Room;
 import cn.hotel.entity.model.PagerModel;
 import cn.hotel.service.HotelRoomService;
 import cn.hotel.service.utils.DateUtils;
+import cn.hotel.service.utils.RestModel;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -12,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
@@ -59,6 +63,58 @@ public class HotelRoomInfoController extends BaseController {
         pager.setTotal(count);
         return pager;
     }
+
+    //酒店客房添加记录
+    @RequestMapping(value = "/htm/hotelRoomInfoAdd.action",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonModel hotelRoomInfoAdd(HttpServletRequest request,
+                                      @RequestParam(value = "roomNo",required = true) String roomNo,
+                                      @RequestParam(value = "roomType",required = true) String roomType,
+                                      @RequestParam(value = "isClean",required = true) String isClean,
+                                      @RequestParam(value = "isLive",required = true) String isLive,
+                                      @RequestParam(value = "roomArea",required = true) String roomArea,
+                                      @RequestParam(value = "isVip",required = true) String isVip){
+        JsonModel jsonModel = new JsonModel();
+        if(StringUtils.isEmpty(roomType)
+            || StringUtils.isEmpty(roomNo)
+            || StringUtils.isEmpty(isClean)
+            || StringUtils.isEmpty(isLive)
+            || StringUtils.isEmpty(roomArea)
+            || StringUtils.isEmpty(isVip)){
+            jsonModel.setStatus(false);
+            jsonModel.setMessage("所传参数不能为空!");
+            return  jsonModel;
+        }
+        //数据封装
+        Map <String, Object> parms = converParms(roomNo, roomType, isClean, isLive, roomArea, isVip);
+        RestModel restModel = hotelRoomService.addHotelRoomInfoRecrd(parms);
+        if(restModel.getCode().toString().equals("200")){
+            jsonModel.setStatus(true);
+            jsonModel.setMessage("添加成功!");
+            return jsonModel;
+        }
+        jsonModel.setStatus(false);
+        jsonModel.setMessage("添加失败!");
+        return jsonModel;
+    }
+
+    //数据封装
+    private Map<String,Object> converParms(String roomNo, String roomType, String isClean, String isLive, String roomArea, String isVip) {
+        HashMap <String, Object> param = new HashMap <>();
+        param.put("roomNo",roomNo);
+        param.put("roomType",roomType);
+        param.put("isClean",isClean);
+        param.put("isLive",isLive);
+        param.put("roomDetail","json串");
+        param.put("roomArea",roomArea);
+        param.put("isVip",isVip);
+        param.put("hotelId",1);
+        param.put("vipPrice",0);
+        param.put("createTime",System.currentTimeMillis());
+        param.put("modify",System.currentTimeMillis());
+        return param;
+    }
+
 
     private Map<String,Object> getSearchParam(HttpServletRequest request) {
         Map <String, Object> param = new HashMap <>();

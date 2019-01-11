@@ -28,7 +28,11 @@ public class BaseRouterContrller {
     }
 
 
-
+    //配置前台客户端首页
+    @RequestMapping(value = "/htm/clientShowPage.action")
+    public String clientShowPage(){
+        return "client/index";
+    }
 
 
 }

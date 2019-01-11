@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class Room implements Serializable {
-    private Long roomId;
+    private Integer roomId;
+    private Integer hotelId;
     private Long roomNo;
     private String roomType;
     private String isClean;
@@ -20,11 +21,19 @@ public class Room implements Serializable {
     public Room() {
     }
 
-    public Long getRoomId() {
+    public Integer getHotelId() {
+        return hotelId;
+    }
+
+    public void setHotelId(Integer hotelId) {
+        this.hotelId = hotelId;
+    }
+
+    public Integer getRoomId() {
         return roomId;
     }
 
-    public void setRoomId(Long roomId) {
+    public void setRoomId(Integer roomId) {
         this.roomId = roomId;
     }
 
@@ -120,6 +129,7 @@ public class Room implements Serializable {
     public String toString() {
         return "Room{" +
                 "roomId=" + roomId +
+                ", hotelId=" + hotelId +
                 ", roomNo=" + roomNo +
                 ", roomType='" + roomType + '\'' +
                 ", isClean='" + isClean + '\'' +

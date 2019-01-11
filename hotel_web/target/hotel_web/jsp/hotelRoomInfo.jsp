@@ -46,40 +46,93 @@
         <div width="100%" style="margin:4px">
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnHotelRoomDetail()">客房详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">添加客房</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-edit" onclick="btnModifyHotelRoom()">修改客房</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-edit" onclick="btnModifyHotelRoom()">修改客房信息</a>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </form>
 </div>
 
 <!------------------点击新增按钮，显示新增的弹窗---------------------------------->
-<div id="dgAdminDetail" class="easyui-dialog" title="新增页面" width="420px" height="320px" closed="true" buttons="#dlgAdminDetail-buttons"  style="padding:10px" modal="true">
+<div id="dgAdminDetail" class="easyui-dialog" title="新增页面" width="430px" height="375px" closed="true" buttons="#dlgAdminDetail-buttons"  style="padding:10px" modal="true">
     <form id="adminDetail" method="post">
         <table align="center" width="90%" cellpadding="2" cellspacing="2">
             <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房编号:<input type="text" id="roomNo" name="roomNo" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房类型:
-                <select class="easyui-combobox" id="adminIdType4"  name="adminIdType5"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
-                    <option value="0" selected>新建</option>
+                <select class="easyui-combobox" id="roomType"  name="roomType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected>全部</option>
+                    <option value="0">新建</option>
                     <option value="1">普通大床房</option>
                     <option value="2">普通双人床</option>
                 </select>
             </td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否已打扫:
-                <select class="easyui-combobox" id="adminIdType"  name="adminIdType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                <select class="easyui-combobox" id="isClean"  name="isClean"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected>全部</option>
                     <option value="0">否</option>
                     <option value="1">是</option>
                 </select></td>
             </tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否已居住:
-                <select class="easyui-combobox" id="adminIdType1"  name="adminIdType1"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                <select class="easyui-combobox" id="isLive"  name="isLive"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected>全部</option>
                     <option value="0" selected>否</option>
                     <option value="1">是</option>
                 </select>
             </td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房面积:<input type="text" id="adminRealName" name="adminPwd" class="easyui-textbox" missingMessage="请输入真实姓名"validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房面积:<input type="text" id="roomArea" name="roomArea" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;价格:<input type="text" id="vipPrice" name="vipPrice" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否为VIP客房:
-                <select class="easyui-combobox" id="adminIdType2"  name="adminIdType3"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                <select class="easyui-combobox" id="isVip"  name="isVip"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected>全部</option>
+                    <option value="0" selected>否</option>
+                    <option value="1">是</option>
+                </select>
+            </td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;所属酒店:<input type="text" id="hotelId" name="hotelId" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
+            <tr><td></td></tr>
+        </table>
+    </form>
+</div>
+<div id="dlgAdminDetail-buttons">
+    <div align="center">
+        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="btnsave()" iconcls="icon-save">确认</a>
+        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="javascript:$('#dgAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
+    </div>
+</div>
+
+
+
+<!------------------点击修改按钮，显示修改的弹窗---------------------------------->
+<div id="dgModifyDetail" class="easyui-dialog" title="客房信息修改" width="430px" height="375px" closed="true" buttons="#dlgModifyDetail-buttons"  style="padding:10px" modal="true">
+    <form id="modifyDetail" method="post">
+        <table align="center" width="90%" cellpadding="2" cellspacing="2">
+            <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房编号:<input type="text" id="modifyRoomNo" name="modifyRoomNo" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房类型:
+                <select class="easyui-combobox" id="modifyRoomType"  name="modifyRoomType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="0" selected>新建</option>
+                    <option value="1">普通大床房</option>
+                    <option value="2">普通双人床</option>
+                </select>
+            </td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否已打扫:
+                <select class="easyui-combobox" id="modifyIsClean"  name="modifyIsClean"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected>全部</option>
+                    <option value="0">否</option>
+                    <option value="1">是</option>
+                </select></td>
+            </tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否已居住:
+                <select class="easyui-combobox" id="modifyIsLive"  name="modifyIsLive"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected>全部</option>
+                    <option value="0" selected>否</option>
+                    <option value="1">是</option>
+                </select>
+            </td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房面积:<input type="text" id="modifyRoomArea" name="modifyRoomArea" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;价格:<input type="text" id="modifyVipPrice" name="modifyVipPrice" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否为VIP客房:
+                <select class="easyui-combobox" id="modifyIsVip"  name="modifyIsVip"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected></option>
                     <option value="0" selected>否</option>
                     <option value="1">是</option>
@@ -89,10 +142,10 @@
         </table>
     </form>
 </div>
-<div id="dlgAdminDetail-buttons">
+<div id="dlgModifyDetail-buttons">
     <div align="center">
-        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="btnsave()" iconcls="icon-save">确认</a>
-        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="javascript:$('#dgAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
+        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="modifySave()" iconcls="icon-save">确认</a>
+        <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="javascript:$('#dgModifyDetail').dialog('close')" iconcls="icon-cancel">取消</a>
     </div>
 </div>
 
@@ -158,7 +211,7 @@
     //点上一页或下一页只会执行的加载列表功能
     function datagridBindOnSelectPage() {
         $("#dg").datagrid("loading");
-        $.get("/htm/adminInfoList.action", $("#formSearch").serialize(), function(pager){
+        $.get("/htm/hotelRoomInfoList.action", $("#formSearch").serialize(), function(pager){
             $("#dg").datagrid("loadData", {"total":pager.total, rows:pager.pageData});
             $("#dg").datagrid("loaded");
 
@@ -171,15 +224,127 @@
         $('#dgAdminDetail').dialog("open").window("center");
     }
     function btnsave() {
+        var roomNo = $("#roomNo").val();
+        var roomType = $("#roomType").combobox("getValue");
+        var isClean = $("#isClean").combobox("getValue");
+        var isLive = $("#isLive").combobox("getValue");
+        var roomArea = $("#roomArea").val();
+        var isVip = $("#isVip").combobox("getValue");
+        var hotelId = $("#hotelId").val();
+        if(roomType ==""){
+            $.messager.alert("提示","客房类型不能为空!","info");
+            return ;
+        }else if(isClean ==""){
+            $.messager.alert("提示","是否打扫不能为空!","info");
+            return ;
+        }else if(isLive ==""){
+            $.messager.alert("提示","客房是否居住不能为空!","info");
+            return ;
+        }else if(roomArea ==""){
+            $.messager.alert("提示","客房居住面积不能为空!","info");
+            return ;
+        }else if(isVip ==""){
+            $.messager.alert("提示","客房是否为VIP客房不能为空!","info");
+            return ;
+        }else if(hotelId ==""){
+            $.messager.alert("提示","所属酒店不能为空!","info");
+            return ;
+        }
+        $.post("/htm/hotelRoomInfoAdd.action", {
+                roomNo:roomNo,
+                roomType: roomType,
+                isClean:isClean,
+                isLive:isLive,
+                roomArea:roomArea,
+                isVip:isVip
+            },function(data){
+            $.messager.progress('close');
+            if (data.status) {
+                    $.messager.alert("信息", "添加客房成功", "info");
+                    $('#dgAdminDetail').dialog('close');
+                    datagridBind();
+            } else {
+                var message = "添加客房失败！";
+                if (data.message != null) {
+                    message = data.message;
+                }
+                $.messager.alert("信息", message, "error");
+            }
+        }, "json");
 
     }
 
-    //修改操作
-    function btnModify() {
-        $("#dgModify").form('clear');        //每次新增之前，清空原数据
-        $('#dgModifyDetail').dialog("open").window("center");
+    //修改客房信息--数据回显
+    function btnModifyHotelRoom() {
+        var row = $('#dg').datagrid('getSelected');
+        if(row !=null){
+            var roomId = row.roomId;
+            var roomNo = row.roomNo;
+            var roomType = row.roomType;
+            var clean = row.isClean;
+            var isLive = row.isLive;
+            var roomArea = row.roomArea;
+            var isVip = row.isVip;
+            var vipPrice = row.vipPrice;
+
+            $("#modifyDetail").form('load',{
+                modifyRoomId :roomId,
+                modifyRoomNo:roomNo,
+                modifyRoomType:roomType,
+                modifyIsClean:clean,
+                modifyRoomArea:roomArea,
+                modifyIsLive:isLive,
+                modifyIsVip:isVip,
+                modifyRoomArea:roomArea,
+                modifyVipPrice:vipPrice,
+            });
+            //客房编号不能修改
+            $('#modifyRoomNo').textbox('disable');
+            $('#dgModifyDetail').dialog("open").window("center");
+
+        }else{
+            $.messager.alert("提示","请先选择要修改的项目","info");
+            return ;
+        }
     }
 
+    //保存修改的数据
+    function modifySave() {
+        var modifyRoomNo = $("#modifyRoomNo").val();
+        var modifyRoomType = $("#modifyRoomType").combobox("getValue");
+        var modifyIsClean = $("#modifyIsClean").combobox("getValue");
+        var modifyIsLive = $("#modifyIsLive").combobox("getValue");
+        var modifyRoomArea = $("#modifyRoomArea").val();
+        var modifyIsVip = $("#modifyIsVip").combobox("getValue");
+        var modifyVipPrice = $("#modifyVipPrice").val();
+        var modifyIsVip = $("#modifyIsVip").combobox("getValue");
+
+        if(modifyRoomNo ==""){
+            $.messager.alert("提示","客房编号不能为空!","info");
+            return ;
+        }else if(modifyRoomType ==""){
+            $.messager.alert("提示","客房类型不能为空!","info");
+            return ;
+        }else if(modifyIsClean ==""){
+            $.messager.alert("提示","客房是否被清理不能为空!","info");
+            return ;
+        }else if(modifyIsLive ==""){
+            $.messager.alert("提示","客房是否已经居住不能为空!","info");
+            return ;
+        }else if(modifyRoomArea ==""){
+            $.messager.alert("提示","客房面积不能为空!","info");
+            return ;
+        }else if(modifyVipPrice ==""){
+            $.messager.alert("提示","客房价格不能为空!","info");
+            return ;
+        }
+
+
+
+
+    }
+    
+    
 
     //查询按钮
     function btnSearch() {

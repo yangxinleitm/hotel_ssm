@@ -1,0 +1,80 @@
+
+html{
+	color:#000;
+	/*--
+		背景规定颜色，使iframe背景不透明
+	--*/
+	/*background:#FFF;*/
+}
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td {
+	margin:0;
+	padding:0;
+}
+table {
+	
+}
+fieldset,
+img {
+	border:0;
+}
+
+body{font-size: 12px; font-family:arial,"\5b8b\4f53"; color: #7F7F7F;}
+img{display: block;}
+
+/*---------------------------------通用样式------------------------------------*/
+.w12{width: 12px;}
+.w36{width: 36px;}
+.w46{width: 46px;}
+.h1{width:247px; height: 0px; border-bottom: 1px dashed #ccdee5; margin:18px 0 18px 10px; }
+.h70{height: 70px;}
+.no_mr{margin-right: 0 !important;}
+
+/*---------------------------------头部------------------------------------*/
+.ld_header{height: 106px; border-bottom: 2px solid #336699;}
+.ld_header_in{width: 1000px; margin: 0 auto;}
+.ld_logo{padding-top: 19px; overflow: hidden;}
+.ld_logo img{float:left;}
+
+ 
+/*---------------------------------登录页面------------------------------------*/
+.ldL_con{height: 610px; background:#f5f8fb; background: url(../images/cc.png)  no-repeat }
+.ldL_con_in{width: 1000px; height: 541px; overflow: hidden; margin: 0 auto; background: url(../images/0.png)  no-repeat left top;}
+.ld_form{width: 290px; height: 254px; overflow: hidden; padding-left: 30px; margin:178px 0 0 609px; }
+.form_title{font-size: 18px; font-family: Microsoft Yahei; color: #336599; margin: 26px 0 15px 0;}
+.ld_form p{margin-bottom:13px ;}
+.ld_form input{width: 233px; height: 20px; line-height: 20px; padding:6px 5px 6px 30px; border: 1px solid #97abc5; background: url(../images/icon01.png) no-repeat 10px 8px; }
+.ld_form .ld_pass{background-position: 13px -47px;}
+.ld_login{padding:10px 29px 0 0; overflow: hidden;}
+.ld_login_in{width: 260px; height: 31px; background:url(../images/ld_login.jpg); line-height: 31px; font-size: 14px; color: #fff; text-align: center; cursor: pointer; margin-bottom: 10px; }
+.ld_login a{float: right; color: #7F7F7F;}
+  
+
+.ld_footer{height: 64px; border-top: 1px solid #d2dfec; background:#f5f8fb;}
+.ld_footer_in{width: 450px; margin: 0 auto; padding-top: 10px;}
+.ld_footer_in p{width:100%; line-height: 22px; text-align: center;}
+
+

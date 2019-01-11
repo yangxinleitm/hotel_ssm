@@ -28,7 +28,7 @@
        <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <span style="color: white">登录人:【admin】</span>
+                    <span style="color: white">登录人:<span style="color: #00ee00">【${admin.userName}】</span></span>
                 </a>
             </li>
             <li class="dropdown">
@@ -42,25 +42,7 @@
 
 <script type="text/javascript">
     function Logout() {
-        /* $.messager.confirm("确认", "操作后将会更新对账记录对账结果为差错已处理状态，请确定是否操作？", function (r) {
-             if (r) {
-                 $.post("handleUserAccountCheckError.htm", {accountReconId : accountReconId, remark : remark}, function (data) {
-                     if (data.status) {
-                         var message = data.message;
-                         $.messager.alert("信息", message, "info");
-                         $('#dlgErrorDeal').dialog('close');
-                         $("#dealDescribe").textbox('setValue', "");
-                         datagridBind();
-                     } else {
-                         var message = data.message;
-                         $.messager.alert("信息", message, "error");
-                         $('#dlgErrorDeal').dialog('close');
-                         $("#dealDescribe").textbox('setValue', "");
-                         datagridBind();
-                     }
-                 }, "json");
-             }
-         });*/
+
     }
 </script>
 

@@ -3,6 +3,7 @@
 <mapper namespace="cn.hotel.business.HotelRoomMapper">
   <resultMap id="roomMap" type="cn.hotel.entity.Room">
     <id column="room_id"  property="roomId"/>
+    <result column="hotel_id"  property="hotelId"/>
     <result column="room_no"  property="roomNo"/>
     <result column="room_type" property="roomType"/>
     <result column="is_clean"  property="isClean"/>
@@ -48,8 +49,8 @@
 
   <insert id="addHotelRoomInfoRecrd" parameterType="java.util.Map">
     INSERT INTO
-    room(room_id,room_no,room_type,is_clean,is_live,room_area,room_detail,is_vip,vip_price,create_time,modify_time,remark)
-    VALUES (#{roomId},#{roomNo},#{roomType},#{isClean},#{isLive},#{roomArea},#{roomDetail},#{isVip},#{vipPrice},#{createTime},#{modifyTime},#{remark})
+    room(hotel_id,room_no,room_type,is_clean,is_live,room_area,room_detail,is_vip,vip_price,create_time,modify_time,remark)
+    VALUES (#{hotelId},#{roomNo},#{roomType},#{isClean},#{isLive},#{roomArea},#{roomDetail},#{isVip},#{vipPrice},#{createTime},#{modifyTime},#{remark})
   </insert>
 
 </mapper>
