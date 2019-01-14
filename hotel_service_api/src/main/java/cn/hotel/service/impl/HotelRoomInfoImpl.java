@@ -39,5 +39,16 @@ public class HotelRoomInfoImpl implements HotelRoomService {
         return restModel;
     }
 
+    //修改客房信息
+    @Override
+    public RestModel updateRoomInfoRecord(Room room) {
+        RestModel restModel = new RestModel();
+        restModel.setCode("200");
+        restModel.setMessage("成功");
+        hotelRoomMapper.updateRoomInfoRecord(room);
+        restModel.setData("");
+        return restModel;
+    }
+
 
 }

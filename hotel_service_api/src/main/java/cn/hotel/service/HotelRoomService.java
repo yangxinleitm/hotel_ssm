@@ -16,4 +16,7 @@ public interface HotelRoomService {
     //添加客房信息
     public RestModel addHotelRoomInfoRecrd(Map<String,Object> map);
 
+    //修改客房信息
+    public RestModel  updateRoomInfoRecord(Room room);
+
 }

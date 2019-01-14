@@ -1,7 +1,6 @@
 package cn.hotel.controller;
 
 import cn.hotel.controller.utils.JsonModel;
-import cn.hotel.controller.utils.RestUtils;
 import cn.hotel.entity.Room;
 import cn.hotel.entity.model.PagerModel;
 import cn.hotel.service.HotelRoomService;
@@ -97,6 +96,48 @@ public class HotelRoomInfoController extends BaseController {
         jsonModel.setMessage("添加失败!");
         return jsonModel;
     }
+
+
+    //酒店客房修改记录
+    @RequestMapping(value = "/htm/hotelRoomInfoModify.action",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonModel hotelRoomInfoModify(HttpServletRequest request,
+                                      @RequestParam(value = "modifyRoomId",required = true) String modifyRoomId,
+                                      @RequestParam(value = "modifyRoomNo",required = true) String modifyRoomNo,
+                                      @RequestParam(value = "modifyRoomType",required = true) String modifyRoomType,
+                                      @RequestParam(value = "modifyIsClean",required = true) String modifyIsClean,
+                                      @RequestParam(value = "modifyRoomArea",required = true) String modifyRoomArea,
+                                      @RequestParam(value = "modifyIsLive",required = true) String modifyIsLive,
+                                      @RequestParam(value = "modifyIsVip",required = true) String modifyIsVip,
+                                      @RequestParam(value = "modifyVipPrice",required = true) String modifyVipPrice){
+        JsonModel jsonModel = new JsonModel();
+        if(StringUtils.isEmpty(modifyRoomId)
+                || StringUtils.isEmpty(modifyRoomNo)
+                || StringUtils.isEmpty(modifyRoomType)
+                || StringUtils.isEmpty(modifyIsClean)
+                || StringUtils.isEmpty(modifyRoomArea)
+                || StringUtils.isEmpty(modifyIsLive)
+                || StringUtils.isEmpty(modifyIsVip)
+                || StringUtils.isEmpty(modifyVipPrice)){
+            jsonModel.setStatus(false);
+            jsonModel.setMessage("所传参数不能为空!");
+            return  jsonModel;
+        }
+        //数据封装
+        Room room = new Room();
+        room.setRoomId(Integer.valueOf(modifyRoomId));
+        room.setRoomNo(Long.valueOf(modifyRoomNo));
+        room.setRoomType(modifyRoomType);
+        room.setRoomType(modifyRoomType);
+        room.setIsClean(modifyIsClean);
+        room.setRoomArea(modifyRoomArea);
+        room.setIsLive(modifyIsLive);
+        room.setIsVip(modifyIsVip);
+        jsonModel.setStatus(false);
+        jsonModel.setMessage("修改信息失败!");
+        return jsonModel;
+    }
+
 
     //数据封装
     private Map<String,Object> converParms(String roomNo, String roomType, String isClean, String isLive, String roomArea, String isVip) {

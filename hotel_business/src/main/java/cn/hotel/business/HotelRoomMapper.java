@@ -18,5 +18,7 @@ public interface HotelRoomMapper {
     //添加客房信息
     public void addHotelRoomInfoRecrd(Map<String,Object> map);
 
+    //修改客房信息
+    public void updateRoomInfoRecord(Room room);
 
 }

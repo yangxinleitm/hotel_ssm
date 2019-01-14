@@ -28,6 +28,7 @@
         <ul>
             <li><a href="/htm/hotel/hotelRoomInfo.action"  target="main">酒店客房信息</a></li>
             <li><a href="/htm/hotel/hotelMaterial.action"  target="main">酒店器材管理</a></li>
+            <li><a href="/htm/hotel/hotelDishManagent.action"  target="main">菜品管理</a></li>
         </ul>
     </li>
 
@@ -40,22 +41,21 @@
                 <input type="checkbox" name ="sub-group-1" id="sub-group-1">
                 <label for="sub-group-1">客户消费记录</label>
                 <ul>
-                    <li><a href="/htm/hello3.htm"  target="main">用餐消费</a></li>
-                    <li><a href="/htm/hello3.htm"  target="main">客房消费</a></li>
+                    <li><a href="/htm/fiance/dishFee.action"  target="main">用餐消费</a></li>
+                    <li><a href="/htm/fiance/customerRoomFee.action"  target="main">客房消费</a></li>
                 </ul>
             </li>
-            <li><a href="/htm/hello2.do"  target="main">客房价格管理</a></li>
-            <li><a href="/htm/hello3.do"  target="main">当日收入报表</a></li>
+            <li><a href="/htm/fiance/roomFee.action"  target="main">客房价格管理</a></li>
+            <li><a href="/htm/fiance/dayReport.action"  target="main">当日收入报表</a></li>
         </ul>
     </li>
 
     <%--系统基础配置--%>
     <li class="has-children">
         <input type="checkbox" name ="group-4" id="group-4">
-        <label for="group-4">系统权限配置</label>
+        <label for="group-4">基础设置</label>
         <ul>
-            <li><a href="/htm/hello2.do"  target="main">基础权限配置</a></li>
-            <li><a href="/htm/hello2.do"  target="main">功能树展示</a></li>
+            <li><a href="/htm/base/updatePwd.action"  target="main">修改密码</a></li>
         </ul>
     </li>
 </ul>

@@ -295,7 +295,6 @@
                 modifyRoomArea:roomArea,
                 modifyIsLive:isLive,
                 modifyIsVip:isVip,
-                modifyRoomArea:roomArea,
                 modifyVipPrice:vipPrice,
             });
             //客房编号不能修改
@@ -339,12 +338,8 @@
             return ;
         }
 
-
-
-
     }
-    
-    
+
 
     //查询按钮
     function btnSearch() {
