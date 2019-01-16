@@ -71,15 +71,11 @@
   <update id="updateAdminInfo" parameterType="cn.hotel.entity.AdminDto" >
     UPDATE admin
     SET
-    <if test="admin_name !='' ">admin_name = #{roomNo},</if>
-    <if test="admin_pwd !=''">admin_pwd = #{roomType},</if>
-    <if test="admin_realname !=''">admin_realname = #{isClean},</if>
-    <if test="admin_sex !=''">admin_sex = #{isLive},</if>
-    <if test="admin_birthday !=''">admin_birthday = #{roomArea},</if>
-    <if test="admin_nation !=''">admin_nation =#{isVip},</if>
-    <if test="admin_idcard !=''">admin_idcard=#{vipPrice},</if>
-    <if test="modifyTime !=''">modify_time=#{modifyTime}</if>
-    WHERE room_id = #{roomId}
+    <if test="adminMobile !='' ">admin_mobile = #{adminMobile},</if>
+    <if test="address !=''">admin_address = #{address},</if>
+    <if test="adminIsPostion !=''">admin_ispostion = #{adminIsPostion},</if>
+    <if test="modifyTime !=''">modify_time = #{modifyTime}</if>
+    WHERE admin_id = #{adminId}
   </update>
 
   <insert id="AdminInfoAdd" parameterType="cn.hotel.entity.AdminDto">

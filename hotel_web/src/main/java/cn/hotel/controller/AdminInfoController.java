@@ -21,9 +21,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.swing.filechooser.FileSystemView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -120,6 +125,54 @@ public class AdminInfoController {
 
     }
 
+    //修改记录
+    @RequestMapping(value = "/htm/adminInfoModify.action",method = RequestMethod.POST)
+    @ResponseBody
+    public JsonModel adminUserAdd(HttpServletRequest request){
+        JsonModel jsonModel = new JsonModel();
+        AdminDto adminRequest = getModifySearchParam(request);
+        if(adminRequest ==null){
+            jsonModel.setStatus(false);
+            jsonModel.setMessage("所有参数不能为空！");
+            return  jsonModel;
+        }
+        logger.info("修改管理员信息传入的参数 param={}",JSON.toJSONString(adminRequest));
+        RestModel restModel = adminInfoService.updateAdminInfo(adminRequest);
+        if(RestModel.CODE_SUCCESS.toString().equals(restModel.getCode().toString())){
+            jsonModel.setStatus(true);
+            jsonModel.setMessage("修改成功");
+            jsonModel.setResult(restModel.getData());
+            return jsonModel;
+        }else{
+            jsonModel.setStatus(false);
+            jsonModel.setMessage("修改失败");
+            return jsonModel;
+        }
+
+    }
+
+    public AdminDto getModifySearchParam(HttpServletRequest request){
+        AdminDto adminDto = new AdminDto();
+        String modifyAdminId = request.getParameter("modifyAdminId");
+        if(StringUtils.isNotBlank(modifyAdminId)){
+            adminDto.setAdminId(Long.valueOf(modifyAdminId));
+        }
+        String mobile = request.getParameter("modifyAdminMobile");
+        if(StringUtils.isNotBlank(mobile)){
+            adminDto.setAdminMobile(Long.valueOf(mobile));
+        }
+        String modifyAddAdminAddress = request.getParameter("modifyAddAdminAddress");
+        if(StringUtils.isNotBlank(modifyAddAdminAddress)){
+            adminDto.setAddress(modifyAddAdminAddress);
+        }
+        String modifyAdminIspostion = request.getParameter("modifyAdminIspostion");
+        if(StringUtils.isNotBlank(modifyAdminIspostion)){
+            adminDto.setAdminIsPostion(modifyAdminIspostion);
+        }
+        return adminDto;
+    }
+
+
     public AdminDto converData(String adminName,String adminPwd,String adminRealName,String adminSex,String adminBirthday,String adminNation,
                                String adminIdCard,String adminMobile,String adminAdress,String adminIdType,String adminIsPostion){
         AdminDto adminInfoRequest = new AdminDto();
@@ -141,7 +194,7 @@ public class AdminInfoController {
     //导出数据文件
     @RequestMapping(value = "/htm/exportAdminUserInfoFile.action",method = RequestMethod.POST)
     @ResponseBody
-    public JsonModel exportExcel(HttpServletRequest request){
+    public JsonModel exportExcel(HttpServletRequest request, HttpServletResponse response){
         JsonModel jsonModel = new JsonModel();
         Long count = 0L;
         AdminInfoRequest adminInfoRequest = getSearchParam(request);
@@ -152,12 +205,17 @@ public class AdminInfoController {
         if(restModel.getCode().equals(SysResponse.RECORD_CODE.RESPONSE_SUCCESS.get().toString())){
             try{
                 //应当前的时间戳定义导出文件的名称
-                String fileName = String.valueOf(System.currentTimeMillis());
-                //写文件头
-                File exportFile = new File("F://" + fileName + ".csv");
-                //Files是gua的架包
-                Files.append(new String(new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF}, "UTF-8"), exportFile, Charsets.UTF_8);//对文件添加BOM头后，用excel打开即可无乱码
-                Files.append("管理员ID,管理员呢程,管理员密码,管理员真实姓名,民族,身份证,手机号,身份证类型,是否在岗,创建时间,修改时间\r\n", exportFile, Charsets.UTF_8);
+                Long currentTimeMillis = System.currentTimeMillis();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                String newDate = simpleDateFormat.format(currentTimeMillis).toString().substring(0, 10);
+
+                String fileName = String.valueOf(newDate+"管理员报表");
+                //写文件头 Files是gua的架包
+                String path = FileSystemView.getFileSystemView().getHomeDirectory().getPath();//这便是读取桌面路径的方法了
+
+                File exportFile = new File(path +"//"+ fileName + ".xls");
+                Files.append(new String(new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF}, "UTF-8"), exportFile, Charsets.UTF_8);  //对文件添加BOM头后，用excel打开即可无乱码
+                Files.append("管理员ID,管理员呢称,管理员密码,管理员真实姓名,民族,身份证,手机号,身份证类型,是否在岗,创建时间,修改时间\r\n", exportFile, Charsets.UTF_8);
                 StringBuilder sb = new StringBuilder();
                 for(AdminDto model : data){
                     sb.append(model.getAdminId()==null? "":model.getAdminId()).append(",");
@@ -167,15 +225,19 @@ public class AdminInfoController {
                     sb.append(model.getAdminNation()==null?"":model.getAdminNation()).append(",");
                     sb.append(model.getAdminIdCard()==null? "":model.getAdminIdCard()).append(",");
                     sb.append(model.getAdminMobile()==null ? "":model.getAdminMobile()).append(",");
-                    sb.append(model.getAdminIdCardType()==null? "":model.getAdminIdCardType()).append(",");
-                    sb.append(model.getAdminIsPostion()==null?"":model.getAdminIsPostion()).append(",");
-                    sb.append(model.getCreateTime()==null? "":model.getCreateTime()).append(",");
+                    sb.append(showUserIdCardType(model.getAdminIdCardType()==null? "":model.getAdminIdCardType())).append(",");
+                    sb.append(showIsPostion(model.getAdminIsPostion())).append(",");        //是否在岗
+                    String createTime = simpleDateFormat.format(model.getCreateTime());
+                    sb.append(createTime==null? "":createTime).append(",");
+                    String modifyTime = simpleDateFormat.format(model.getModifyTime());
+                    sb.append(modifyTime==null? "":modifyTime).append(",");
+                    sb.append("\r\n");
                 }
                 Files.append(sb.toString(),exportFile, Charsets.UTF_8);
                 InputStream input = new FileInputStream(exportFile);
-              //  exportFile.delete();
                 jsonModel.setMessage(input.toString());
                 jsonModel.setStatus(true);
+                jsonModel.setResult(data);
             }catch (Exception ex){
                 logger.info("导出异常");
                 jsonModel.setStatus(false);
@@ -186,18 +248,39 @@ public class AdminInfoController {
     }
 
 
+    //数据格式话
+    private  String showIsPostion(String value){
+        if(value.equals("1")){
+            return  "在岗";
+        }else if(value.equals("0")){
+            return  "离职";
+        }else{
+            return  value;
+        }
+    }
 
-    //根据id查询
-    @RequestMapping(value = "/htm/adminById.action",method = RequestMethod.GET)
-    @ResponseBody
-    public PagerModel<AdminDto> selectAdminById(HttpServletRequest request){
-        PagerModel <AdminDto> pager = new PagerModel <>();
-        AdminDto adminDto = new AdminDto();
-        adminDto.setAdminId(Long.valueOf(10101));
-        RestModel restModel = adminInfoService.selectAdminInfoRecordById(adminDto);
+    private String  showUserIdCardType(String value) {
+        if(value.equals("0")){
+            return "身份证";
+        }else if(value.equals("1")){
+            return "护照";
+        }else if(value.equals("2")){
+            return "军官证";
+        }else if(value.equals("3")){
+            return "士兵证";
+        }else if(value.equals("4")){
+            return "回乡证";
+        }else if(value.equals("5")){
+            return "户口本";
+        }else if(value.equals("6")){
+            return "外国护照";
+        }else if(value.equals("7")){
+            return "台胞证";
+        }else if(value.equals("8")){
+            return "其他";
+        }
+        return value;
 
-
-        return pager;
     }
 
 

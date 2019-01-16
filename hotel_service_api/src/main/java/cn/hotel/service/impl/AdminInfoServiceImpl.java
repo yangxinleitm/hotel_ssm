@@ -138,4 +138,39 @@ public class AdminInfoServiceImpl implements AdminInfoService {
     }
 
 
+    //修改操作
+    @Override
+    public RestModel updateAdminInfo(AdminDto adminDto) {
+        AdminDto adminRequest = new AdminDto();
+
+        if(adminDto.getAdminId()!=null && StringUtils.isNotBlank(adminDto.getAdminId().toString())){
+            adminRequest.setAdminId(adminDto.getAdminId());
+        }
+        if(adminDto.getAdminMobile()!=null && StringUtils.isNotBlank(adminDto.getAdminMobile().toString())){
+            adminRequest.setAdminMobile(adminDto.getAdminMobile());
+        }
+        if(adminDto.getAddress()!=null && StringUtils.isNotBlank(adminDto.getAddress())){
+            adminRequest.setAddress(adminDto.getAddress());
+        }
+        if(adminDto.getAdminIsPostion() !=null && StringUtils.isNotBlank(adminDto.getAdminIsPostion())){
+            adminRequest.setAdminIsPostion(adminDto.getAdminIsPostion());
+        }
+
+        //设置修改时间
+        adminRequest.setModifyTime(System.currentTimeMillis());
+
+        int count = adminInfoMapper.updateAdminInfo(adminRequest);
+        if(count >0){
+            restModel.setCode("200");
+            restModel.setMessage("成功");
+            restModel.setData(count);
+        }else{
+            restModel.setCode("300");
+            restModel.setMessage("传入参数不对，调用失败！");
+            restModel.setData("");
+        }
+        return restModel;
+    }
+
+
 }

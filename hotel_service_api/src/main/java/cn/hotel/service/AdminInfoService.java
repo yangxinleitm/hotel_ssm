@@ -21,5 +21,8 @@ public interface AdminInfoService {
 
     public RestModel adminInfoAdd(AdminDto adminDto);
 
+    //修改
+    public RestModel updateAdminInfo(AdminDto adminDto);
+
 }
 

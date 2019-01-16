@@ -110,10 +110,11 @@
 
 
 <!------------------点击修改按钮，显示修改的弹窗---------------------------------->
-<div id="dgModifyAdminDetail" class="easyui-dialog" title="修改页面" width="480px" height="490px" closed="true" buttons="#dlgModifyAdminDetail-buttons"  style="padding:10px" modal="true">
+<div id="dgModifyAdminDetail" class="easyui-dialog" title="修改页面" width="540px" height="490px" closed="true" buttons="#dlgModifyAdminDetail-buttons"  style="padding:10px" modal="true">
     <form id="formModifyAdmin" method="post">
         <table align="center" width="90%" cellpadding="2" cellspacing="2">
-            <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
+            <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;<input type="hidden" id="modifyAdminId" name="modifyAdminId" class="easyui-textbox"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员名称:<input type="text" id="modifyAdminName" name="modifyAdminName" class="easyui-textbox" missingMessage="请输入管理员名称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员密码:<input type="text" id="modifyAdminPwd" name="modifyAdminPwd" class="easyui-textbox" missingMessage="请设置密码"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;真&nbsp;实&nbsp;姓&nbsp;名:<input type="text" id="modifyAdminRealName" name="modifyAdminRealName" class="easyui-textbox" missingMessage="请输入真实姓名"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
@@ -128,7 +129,7 @@
                 <td style="font-size: 12px">&nbsp;&nbsp;&nbsp;&nbsp;出&nbsp;生&nbsp;年&nbsp;月:<input class="easyui-datebox" id="modifyAdminBirthday" name="modifyAdminBirthday" type="text" editable="false"></td>
             </tr> <tr><td></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;民族:
-                <select class="easyui-combobox" id="ModifyAdminNation"  name="modifyAdminNation"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                <select class="easyui-combobox" id="modifyAdminNation"  name="modifyAdminNation"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected></option>
                     <option value="汉族">汉族</option>
                     <option value="其他">其他</option>
@@ -359,6 +360,7 @@
 
                 //数据回显
                 $("#formModifyAdmin").form('load',{
+                    modifyAdminId:adminId,
                     modifyAdminName:adminName,
                     modifyAdminPwd:adminPwd,
                     modifyAdminRealName:adminRealName,
@@ -379,7 +381,7 @@
                 $("#modifyAdminNation").combobox("disable");
                 $("#modifyAdminIdCard").textbox("disable");
                 $("#modifyAdminIdType").combobox("disable");
-                $("#modifyAdminIspostion").combobox("disable");
+              /*  $("#modifyAdminIspostion").combobox("disable");*/
                 $('#dgModifyAdminDetail').dialog("open").window("center");
             }else{
                 $.messager.alert("信息","离职员工不具备修改功能","info");
@@ -391,6 +393,52 @@
         }
     }
     
+    function modifyAdminInfoSave() {
+        var modifyAdminId = $("#modifyAdminId").val();
+        var modifyAdminName = $("#modifyAdminName").val();
+        var modifyAdminPwd = $("#modifyAdminPwd").val();
+        var modifyAdminRealName = $("#modifyAdminRealName").val();
+        var modifyAdminIdCard = $("#modifyAdminIdCard").val();
+        var adminSex = $('input:radio[name="adminSex"]:checked').val();
+        var modifyAdminBirthday = $("#modifyAdminBirthday").datebox("getValue");
+        var modifyAdminIdType = $("#modifyAdminIdType").combobox("getValue");
+        var modifyAdminNation = $("#modifyAdminNation").val();
+        var modifyAdminMobile = $("#modifyAdminMobile").val();
+        var modifyAddAdminAddress = $("#modifyAddAdminAddress").val();
+        var modifyAdminIspostion = $("#modifyAdminIspostion").combobox("getValue");
+
+        $.post("/htm/adminInfoModify.action", {
+                modifyAdminId:modifyAdminId,
+                modifyAdminName:modifyAdminName,
+                modifyAdminPwd:modifyAdminPwd,
+                modifyAdminRealName:modifyAdminRealName,
+                modifyAdminIdCard:modifyAdminIdCard,
+                adminSex:adminSex,
+                modifyAdminBirthday:modifyAdminBirthday,
+                modifyAdminIdType:modifyAdminIdType,
+                modifyAdminNation:modifyAdminNation,
+                modifyAdminMobile:modifyAdminMobile,
+                modifyAddAdminAddress:modifyAddAdminAddress,
+                modifyAdminIspostion:modifyAdminIspostion
+            },
+            function (data) {
+                if (data.status) {
+                    if (data.result != null) {
+                        $.messager.alert("信息", "修改成功！", "info");
+                        $('#dgModifyAdminDetail').dialog('close')
+                        datagridBind();
+                    }
+                } else {
+                    var message = "修改失败！";
+                    if (data.message != null) {
+                        message = data.message;
+                    }
+                    $.messager.alert("信息", message, "error");
+                    datagridBind();
+                }
+            }, "json");
+
+    }
 
 
     //查询按钮
@@ -413,7 +461,7 @@
                         $.messager.progress('close');
                         if (data.status) {
                             if (data.result != null) {
-                                $.messager.alert("信息", "导出成功，请于 2分钟内 点击 <a href='" + data.result + "'>下载</a> 对账失败记录。", "info");
+                                $.messager.alert("信息", "导出成功，请在桌面查看管理员信息报表！", "info");
                             }
                         } else {
                             var message = "导出失败！";
