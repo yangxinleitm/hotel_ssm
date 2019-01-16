@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.math.BigDecimal;
 import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -124,19 +126,34 @@ public class HotelRoomInfoController extends BaseController {
             return  jsonModel;
         }
         //数据封装
+        Room room = getRoom(modifyRoomId, modifyRoomNo, modifyRoomType, modifyIsClean, modifyRoomArea, modifyIsLive, modifyIsVip, modifyVipPrice);
+        logger.info("修改客房信息的传入的参数",JSON.toJSONString(room));
+        RestModel restModel = hotelRoomService.updateRoomInfoRecord(room);
+        logger.info("修改客房信息的返回的参数",JSON.toJSONString(restModel));
+        if(restModel.getCode().equals("200")){
+            jsonModel.setStatus(false);
+            jsonModel.setMessage("修改信息成功!");
+            return jsonModel;
+        }
+        jsonModel.setStatus(false);
+        jsonModel.setMessage("修改信息失败!");
+        return jsonModel;
+    }
+
+    private Room getRoom(String modifyRoomId, String modifyRoomNo, String modifyRoomType, String modifyIsClean, String modifyRoomArea,
+                         String modifyIsLive, String modifyIsVip, String modifyVipPrice) {
         Room room = new Room();
         room.setRoomId(Integer.valueOf(modifyRoomId));
         room.setRoomNo(Long.valueOf(modifyRoomNo));
-        room.setRoomType(modifyRoomType);
         room.setRoomType(modifyRoomType);
         room.setIsClean(modifyIsClean);
         room.setRoomArea(modifyRoomArea);
         room.setIsLive(modifyIsLive);
         room.setIsVip(modifyIsVip);
-        jsonModel.setStatus(false);
-        jsonModel.setMessage("修改信息失败!");
-        return jsonModel;
+        room.setVipPrice(new BigDecimal(modifyVipPrice));
+        return room;
     }
+
 
 
     //数据封装

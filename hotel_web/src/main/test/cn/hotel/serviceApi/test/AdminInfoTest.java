@@ -1,6 +1,7 @@
 package cn.hotel.serviceApi.test;
 
 import cn.hotel.business.AdminInfoMapper;
+import cn.hotel.entity.AdminDto;
 import cn.hotel.entity.CustomerDto;
 import cn.hotel.entity.Enum.SysResponse;
 import cn.hotel.entity.model.AdminInfoRequest;
@@ -25,7 +26,7 @@ public class AdminInfoTest {
     @Autowired
     private AdminInfoService adminInfoService;
 
-    //测试admin表
+    //查询admin列表集合
     @Test
     public void getSelectAdmin(){
         AdminInfoRequest adminInfoRequest = new AdminInfoRequest();
@@ -38,6 +39,8 @@ public class AdminInfoTest {
         }
     }
 
+
+    //删除管理员信息
     @Test
     public void deleteAdmin(){
         HashMap <String, Object> map = new HashMap <>();
@@ -46,6 +49,16 @@ public class AdminInfoTest {
         RestModel restModel = adminInfoService.deleteAdminInfoRecord(map);
         Long count = Long.valueOf(restModel.getData().toString());
         System.out.println(count);
+    }
+
+
+    //根据adminId来查询管理员信息
+    @Test
+    public void selectAdminById(){
+        AdminDto adminDto = new AdminDto();
+        adminDto.setAdminId(Long.valueOf(10101));
+        RestModel restModel = adminInfoService.selectAdminInfoRecordById(adminDto);
+        System.out.println(restModel);
     }
 
 }

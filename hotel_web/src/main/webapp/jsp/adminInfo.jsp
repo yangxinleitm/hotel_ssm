@@ -18,14 +18,13 @@
         <th field="adminName" align="center" width="6%">管理员呢称</th>
         <th field="adminPwd" align="center" width="7%">管理员密码</th>
         <th field="adminRealName" align="center" width="7%">管理员真实姓名</th>
-        <th field="adminNation" align="center" width="6%">民族</th>
-        <th field="adminIdCard" align="center" width="12%">身份证</th>
-        <th field="adminMobile" align="center" width="8%">手机号</th>
-        <th field="adminIdCardType" align="center" width="7%" formatter="showUserIdCardType">身份证类型</th>
-        <th field="adminIsPostion" align="center" width="7%"  formatter="showAdminPostion">是否在岗</th>
-        <th field="createTime" align="center" width="11%" formatter="timeStamp2DateTime">创建时间</th>
-        <th field="modifyTime" align="center" width="11%" formatter="timeStamp2DateTime">修改时间</th>
-        <th field="option" align="center" width="9%">操作</th>
+        <th field="adminNation" align="center" width="8%">民族</th>
+        <th field="adminIdCard" align="center" width="12%" formatter="showUserIdCard">身份证</th>
+        <th field="adminMobile" align="center" width="9%" formatter="showUserMobile">手机号</th>
+        <th field="adminIdCardType" align="center" width="9%" formatter="showUserIdCardType">身份证类型</th>
+        <th field="adminIsPostion" align="center" width="9%"  formatter="showAdminPostion">是否在岗</th>
+        <th field="createTime" align="center" width="12%" formatter="timeStamp2DateTime">创建时间</th>
+        <th field="modifyTime" align="center" width="12%" formatter="timeStamp2DateTime">修改时间</th>
     </tr>
     </thead>
 </table>
@@ -42,8 +41,8 @@
         </div>
         <div width="100%" style="margin:4px">
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">新增管理员</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-add" onclick="btnModify()">修改管理员信息</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-add" onclick="exportFile()">导出数据</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-edit" onclick="btnModify()">修改管理员信息</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-print" onclick="exportFile()">导出数据</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top: 5px;" iconCls="icon-edit" onclick="btnDelete()">删除</a>&nbsp;&nbsp;
         </div>
     </form>
@@ -56,18 +55,29 @@
     <form id="adminDetail" method="post">
         <table align="center" width="90%" cellpadding="2" cellspacing="2">
             <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员ID:<input type="text" id="adminId" name="adminId" class="easyui-textbox" missingMessage="请输入管理员ID"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员呢称:<input type="text" id="adminName" name="adminName" class="easyui-textbox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;设置密码:<input type="text" id="adminPwd" name="adminPwd" class="easyui-textbox" missingMessage="请设置密码"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员名称:<input type="text" id="adminName" name="adminName" class="easyui-textbox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员密码:<input type="text" id="adminPwd" name="adminPwd" class="easyui-textbox" missingMessage="请设置密码"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;真实姓名:<input type="text" id="adminRealName" name="adminPwd" class="easyui-textbox" missingMessage="请输入真实姓名"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证:<input type="text" id="adminIdCard" name="adminPwd" class="easyui-textbox" missingMessage="请输入身份证"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
             <tr>
                 <td style="font-size: 12px"><span class="radioSpan">&nbsp;&nbsp;&nbsp;&nbsp;性别:
-                    <input type="radio" name="isSame" value="1">男</input>
-                    <input type="radio" id="radioDefault1" name="isSame" value="0" checked>女</input>
+                    <input type="radio" id="open" name="adminSex" value="1">男</input>
+                    <input type="radio" name="adminSex" value="0">女</input>
                 </span>
                 </td>
+            </tr><tr><td></td></tr>
+            <tr>
+                <td style="font-size: 12px">&nbsp;&nbsp;&nbsp;&nbsp;出生年月:<input class="easyui-datebox" id="adminBirthday" name="adminBirthday" type="text" editable="false"></td>
             </tr> <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;民族:
+                <select class="easyui-combobox" id="addAdminNation"  name="addAdminNation"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected></option>
+                    <option value="汉族">汉族</option>
+                    <option value="其他">其他</option>
+                </select></td>
+            </tr><tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证:<input type="text" id="adminIdCard" name="adminIdCard" class="easyui-textbox" missingMessage="请输入身份证"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;手机号:<input type="text" id="adminMobileAdd" name="adminMobileAdd" class="easyui-textbox  easyui-validatebox" missingMessage="请输入手机号"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;家庭住址:<input type="text" id="addAdminAdress" name="addAdminAdress" class="easyui-textbox  easyui-validatebox" missingMessage="请输入家庭住址"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证类型:
                 <select class="easyui-combobox" id="adminIdType"  name="adminIdType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected></option>
@@ -82,45 +92,53 @@
                     <option value="8">其他</option>
                 </select></td>
             </tr><tr><td></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;民族:
-                <select class="easyui-combobox" id="modifyAdminNation"  name="modifyAdminNation"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否在岗:
+                <select class="easyui-combobox" id="adminIspostion"  name="adminIspostion"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected></option>
-                    <option value=1>汉族</option>
-                    <option value=2>壮族</option>
+                    <option value=1>在岗</option>
+                    <option value=0>离职</option>
                 </select></td>
-            </tr><tr><td></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;手机号:<input type="text" id="modifyAdminMobile" name="modifyAdminPwd" class="easyui-textbox  easyui-validatebox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;创建时间：<input class="easyui-datebox" id="modifyCreateTime" name="modifyCreateTime" type="text" editable="false"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;家庭住址:<input type="text" id="modifyAdminAdress" name="modifyAdminAdress" class="easyui-textbox  easyui-validatebox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            </tr>
         </table>
     </form>
 </div>
 <div id="dlgAdminDetail-buttons">
-    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-left: 150px;" onclick="btnsave()" iconcls="icon-save">确认</a>
+    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-left: 150px;" onclick="btnsave()" iconcls="icon-save">保存</a>
     <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-right: 150px;" onclick="javascript:$('#dgAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
 </div>
 
 
 
 <!------------------点击修改按钮，显示修改的弹窗---------------------------------->
-<div id="dgModifyDetail" class="easyui-dialog" title="修改页面" width="480px" height="490px" closed="true" buttons="#dlgModifyDetail-buttons"  style="padding:10px" modal="true">
-    <form id="formModifyDetail" method="post">
+<div id="dgModifyAdminDetail" class="easyui-dialog" title="修改页面" width="480px" height="490px" closed="true" buttons="#dlgModifyAdminDetail-buttons"  style="padding:10px" modal="true">
+    <form id="formModifyAdmin" method="post">
         <table align="center" width="90%" cellpadding="2" cellspacing="2">
             <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员ID:<input type="text" id="modifyAdminId" name="adminId" class="easyui-textbox" missingMessage="请输入管理员ID"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员呢称:<input type="text" id="modifyAdminName" name="adminName" class="easyui-textbox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;设置密码:<input type="text" id="modifyPassword" name="adminPwd" class="easyui-textbox" missingMessage="请设置密码"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;真实姓名:<input type="text" id="modifyAdminRealName" name="adminPwd" class="easyui-textbox" missingMessage="请输入真实姓名"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证:<input type="text" id="modifyAdminIdCard" name="adminPwd" class="easyui-textbox" missingMessage="请输入身份证"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员名称:<input type="text" id="modifyAdminName" name="modifyAdminName" class="easyui-textbox" missingMessage="请输入管理员名称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;管理员密码:<input type="text" id="modifyAdminPwd" name="modifyAdminPwd" class="easyui-textbox" missingMessage="请设置密码"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;真&nbsp;实&nbsp;姓&nbsp;名:<input type="text" id="modifyAdminRealName" name="modifyAdminRealName" class="easyui-textbox" missingMessage="请输入真实姓名"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
             <tr>
                 <td style="font-size: 12px"><span class="radioSpan">&nbsp;&nbsp;&nbsp;&nbsp;性别:
-                    <input type="radio" name="isSame" value="1">男</input>
-                    <input type="radio" id="radioDefault" name="isSame" value="0" checked>女</input>
+                    <input type="radio" name="adminSex" value="1">男</input>
+                    <input type="radio" name="adminSex" value="0">女</input>
                 </span>
                 </td>
+            </tr><tr><td></td></tr>
+            <tr>
+                <td style="font-size: 12px">&nbsp;&nbsp;&nbsp;&nbsp;出&nbsp;生&nbsp;年&nbsp;月:<input class="easyui-datebox" id="modifyAdminBirthday" name="modifyAdminBirthday" type="text" editable="false"></td>
             </tr> <tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;民族:
+                <select class="easyui-combobox" id="ModifyAdminNation"  name="modifyAdminNation"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                    <option value="" selected></option>
+                    <option value="汉族">汉族</option>
+                    <option value="其他">其他</option>
+                </select></td>
+            </tr><tr><td></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证:<input type="text" id="modifyAdminIdCard" name="modifyAdminIdCard" class="easyui-textbox" missingMessage="请输入身份证"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;手机号:<input type="text" id="modifyAdminMobile" name="modifyAdminMobile" class="easyui-textbox  easyui-validatebox" missingMessage="请输入手机号"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;家庭住址:<input type="text" id="modifyAddAdminAddress" name="modifyAddAdminAddress" class="easyui-textbox  easyui-validatebox" missingMessage="请输入家庭住址"validType="length[1,20]" maxlength="20" style="width:170px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;身份证类型:
-                <select class="easyui-combobox" id="modifyAdminIdType"  name="adminIdType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+                <select class="easyui-combobox" id="modifyAdminIdType"  name="modifyAdminIdType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
                     <option value="" selected></option>
                     <option value="0" selected>身份证</option>
                     <option value="1">护照</option>
@@ -133,22 +151,19 @@
                     <option value="8">其他</option>
                 </select></td>
             </tr><tr><td></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;民族:
-                <select class="easyui-combobox" id="adminNation"  name="adminNation"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
+            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;是否在岗:
+                <select class="easyui-combobox" id="modifyAdminIspostion"  name="modifyAdminIspostion"  panelHeight="auto" editable="false"  style="width:120px" style="font-size: 12px;">
                     <option value="" selected></option>
-                    <option value=1>汉族</option>
-                    <option value=2>壮族</option>
+                    <option value=1>在岗</option>
+                    <option value=0>离职</option>
                 </select></td>
-            </tr><tr><td></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;手机号:<input type="text" id="adminMobile" name="adminPwd" class="easyui-textbox  easyui-validatebox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;创建时间：<input class="easyui-datebox" id="createTime" name="createTime" type="text" editable="false"></td></tr>
-            <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;家庭住址:<input type="text" id="adminAdress" name="adminAdress" class="easyui-textbox  easyui-validatebox" missingMessage="请输入管理员呢称"validType="length[1,20]" maxlength="20" style="width:180px"></td></tr>
+            </tr>
         </table>
     </form>
 </div>
-<div id="dlgModifyDetail-buttons">
-    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-left: 150px;" onclick="btnsave()" iconcls="icon-save">确认</a>
-    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-right: 150px;" onclick="javascript:$('#dgAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
+<div id="dlgModifyAdminDetail-buttons">
+    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-left: 150px;" onclick="modifyAdminInfoSave()" iconcls="icon-save">保存</a>
+    <a href="javascript:void(0)"  class="easyui-linkbutton" style="margin-right: 150px;" onclick="javascript:$('#dgModifyAdminDetail').dialog('close')" iconcls="icon-cancel">取消</a>
 </div>
 
 
@@ -204,6 +219,10 @@
 
     //加载列表
     function datagridBind() {
+        if($("#createTimeStart").combobox("getValue") > $("#crateTimeEnd").combobox("getValue")){
+            $.messager.alert("信息","创建开始时间不能大于创建结束时间","info");
+            return;
+        }
         $("#dg").datagrid("loading");
         $.get("/htm/adminInfoList.action", $("#formSearch").serialize(), function(pager){
             $("#dg").datagrid("loadData", {"total":pager.total, rows:pager.pageData});
@@ -223,36 +242,155 @@
 
     //添加管理员信息
     function btnAdd() {
-        $("#adminDetail").form('clear');        //每次新增之前，清空原数据
+        $("#adminDetail").form('clear');                        //每次新增之前，清空原数据
+        //添加的时间只能添加在职的员工，因此打开添加框的时间，自动为添加赋值1(在职)，同时设置该下拉框不可选
+        $("#adminIspostion").combobox("setValue","1");
+        $("#adminIspostion").combobox("disable");
         $('#dgAdminDetail').dialog("open").window("center");
     }
     function btnsave() {
-        var adminId = $("#adminId").val();
         var adminName = $("#adminName").val();
         var adminPwd = $("#adminPwd").val();
         var adminRealName = $("#adminRealName").val();
+        var adminSex = $('input:radio[name="adminSex"]:checked').val();
+        var adminBirthday = $("#adminBirthday").datebox("getValue");
+        var addAdminNation = $("#addAdminNation").combobox("getValue");
         var adminIdCard = $("#adminIdCard").val();
+        var adminMobileAdd = $("#adminMobileAdd").val();
+        var addAdminAdress = $("#addAdminAdress").val();
         var adminIdType = $("#adminIdType").combobox("getValue");
-        var adminNation = $("#adminNation").combobox("getValue");
-        var createTime = $("#createTime").datebox("getValue");
-        var adminAdress = $("#adminAdress").val();
+        var adminIspostion = $("#adminIspostion").combobox("getValue");
 
-        //数据校验
-        if(adminId ==""){
-            $.messager.alert("信息","管理员ID不能为空，请填写完整！","info");
+        if(adminName =="" ||adminName==undefined){
+            $.messager.alert("信息","管理员名称不能为空！请重新填写完整","info");
             return;
-        }else if(adminName ==""){
-            $.messager.alert("信息","管理员ID不能为空，请填写完整！","info");
+        }else if(adminName <10){
+            $.messager.alert("信息","管理员名称长度不能大于10个字符！请重新填写完整","info");
+            return;
+        }else if(adminPwd ==""){
+            $.messager.alert("信息","管理员密码不能为空！请重新填写完整","info");
+            return;
+        }else if(adminRealName == ""){
+            $.messager.alert("信息","真实姓名不能为空！请重新填写完整","info");
+            return;
+        }else if(adminName <10){
+            $.messager.alert("信息","管理员用户真实名称长度不能大于10个字符！请重新填写完整","info");
+            return;
+        }else if(adminSex ==""){
+            $.messager.alert("信息","性别不能为空！请重新填写完整","info");
+            return;
+        }else if(adminBirthday ==""){
+            $.messager.alert("信息","出生年月不能为空！请重新填写完整","info");
+            return;
+        }else if(addAdminNation==""){
+            $.messager.alert("信息","民族不能为空！请重新填写完整","info");
+            return;
+        }else if(adminIdCard==""){
+            $.messager.alert("信息","身份证号码不能为空！请重新填写完整","info");
+            return;
+        }else if(adminIdCard !="" && adminIdCard.length !=18){
+            $.messager.alert("信息","身份证号码为满足18位！请重新填写完整","info");
+            return;
+        }else if(adminMobileAdd==""){
+            $.messager.alert("信息","联系方式不能为空！请重新填写完整","info");
+            return;
+        }else if(addAdminAdress==""){
+            $.messager.alert("信息","家庭住址不能为空！请重新填写完整","info");
+            return;
+        }else if(adminIdType ==""){
+            $.messager.alert("信息","岗位类型不能为空！请重新填写完整","info");
+            return;
+        }else if(adminIspostion ==""){
+            $.messager.alert("信息","是否在岗不能为空，请重新填写完整","info");
             return;
         }
 
+        $.post("/htm/adminInfoAdd.action", {adminName:adminName,
+                adminPwd:adminPwd,
+                adminRealName:adminRealName,
+                adminSex:adminSex,
+                adminBirthday:adminBirthday,
+                adminNation:addAdminNation,
+                adminIdCard:adminIdCard,
+                adminMobile:adminMobileAdd,
+                adminAdress:addAdminAdress,
+                adminIdType:adminIdType,
+                adminIspostion:adminIspostion
+            },
+            function (data) {
+                if (data.status) {
+                    if (data.result != null) {
+                        $.messager.alert("信息", "添加成功！", "info");
+                        $('#dgAdminDetail').dialog('close')
+                        datagridBind();
+                    }
+                } else {
+                    var message = "添加失败！";
+                    if (data.message != null) {
+                        message = data.message;
+                    }
+                    $.messager.alert("信息", message, "error");
+                    datagridBind();
+                }
+            }, "json");
+
+
     }
 
-    //修改操作
+
+    /*离职员工不具备修改功能 所以也就不需要数据回显操作*/
+    //修改操作--数据回显
     function btnModify() {
-        $("#dgModify").form('clear');        //每次新增之前，清空原数据
-        $('#dgModifyDetail').dialog("open").window("center");
+        var row = $("#dg").datagrid("getSelected");
+        if(row !=null){
+            if(row.adminIsPostion==1){
+                var adminId = row.adminId;
+                var adminName = row.adminName;
+                var adminPwd = row.adminPwd;
+                var adminRealName = row.adminRealName;
+                var adminSex = row.adminSex;
+                var adminBirthday = row.adminBirthday;
+                var adminNation = row.adminNation;
+                var adminIdCard = row.adminIdCard;
+                var adminMobile = row.adminMobile;
+                var adminAdress = row.address;
+                var adminIdType = row.adminIdCardType;
+                var adminIsPostion = row.adminIsPostion;
+
+                //数据回显
+                $("#formModifyAdmin").form('load',{
+                    modifyAdminName:adminName,
+                    modifyAdminPwd:adminPwd,
+                    modifyAdminRealName:adminRealName,
+                    modifyAdminIdCard:adminIdCard,
+                    adminSex:adminSex,
+                    modifyAdminBirthday: adminBirthday,
+                    modifyAdminIdType:adminIdType,
+                    modifyAdminNation:adminNation,
+                    modifyAdminMobile:adminMobile,
+                    modifyAddAdminAddress:adminAdress,
+                    modifyAdminIdType:adminIdType,
+                    modifyAdminIspostion:adminIsPostion
+                });
+                $("#modifyAdminName").textbox("disable");
+                $("#modifyAdminPwd").textbox("disable");
+                $("#modifyAdminRealName").textbox("disable");
+                $("#modifyAdminBirthday").datebox("disable");
+                $("#modifyAdminNation").combobox("disable");
+                $("#modifyAdminIdCard").textbox("disable");
+                $("#modifyAdminIdType").combobox("disable");
+                $("#modifyAdminIspostion").combobox("disable");
+                $('#dgModifyAdminDetail').dialog("open").window("center");
+            }else{
+                $.messager.alert("信息","离职员工不具备修改功能","info");
+                return;
+            }
+        }else{
+            $.messager.alert("信息","请选择需要修改的记录","info");
+            return;
+        }
     }
+    
 
 
     //查询按钮
@@ -295,7 +433,7 @@
         var row = $("#dg").datagrid("getSelected");
         if(row){
             var adminId = row.adminId.toString();
-            var adminIsPostion = row.adminIsPostion.toString();
+            var adminIsPostion = row.adminIsPostion;
             if(adminIsPostion !="" && adminIsPostion=="0"){
                 $.messager.confirm("提示", "是否确认删除此离职员工的记录？", function (r) {
                     if (r) {
@@ -319,7 +457,7 @@
                     }
                 });
             }else{
-                $.messager.alert("信息","在职岗位不能为空，请重新进行选择！","info");
+                $.messager.alert("信息","在岗职位员工不能删除，请重新选择！","info");
                 return;
             }
         }else{
@@ -329,7 +467,23 @@
     }
 
 
+    function showUserIdCard(value) {
+        if(value !=null && value !=""){
+            var hiddenValue = value.toString().substring(6,14);
+            var hiddenValue = "****";
+            var beforeValue = value.toString().substring(0,6);
+            return beforeValue+hiddenValue+value.toString().substring(14,value.length);
+        }
+    }
 
+    function showUserMobile(value) {
+        if(value !="" && value !=null){
+            var hiddenValue = value.toString().substring(4,8);
+            var hiddenValue = "****";
+            var beforeValue = value.toString().substring(0,4);
+            return beforeValue+hiddenValue+value.toString().substring(8,value.length);
+        }
+    }
 
 
     //获取n天前 yyyy-MM-dd
@@ -342,13 +496,27 @@
 
 
     function showUserIdCardType(value) {
-        if(value==1){
+        if(value==0){
             return "身份证"
-        }else if(value ==2){
+        }else if(value ==1){
+            return "护照";
+        }else if(value==2){
             return "军官证";
-        }else{
-            return value;
+        }else if(value ==3){
+            return "士兵证";
+        }else if(value ==4){
+            return "回乡证";
+        }else if(value == 5){
+            return "户口本";
+        }else if(value ==6){
+            return "外国护照";
+        }else if(value ==7){
+            return "台胞证";
+        }else if(value ==8){
+            return "其他";
         }
+        return value;
+
     }
 
     //是否为VIP用户
@@ -364,9 +532,9 @@
     //是否在岗
     function showAdminPostion(value) {
         if(value ==1) {
-            return "在岗";
+            return '<span style="color:#5cb85c;font-family: 黑体;font-size: 12px">'+"在岗"+'</span>';
         }else if(value ==0){
-            return "离职";
+            return '<span style="color:#c9302c;font-family: 黑体;font-size: 12px">'+"离职"+'</span>';
         }else{
             return value;
         }

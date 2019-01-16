@@ -1,6 +1,7 @@
 package cn.hotel.service.impl;
 
 import cn.hotel.business.AdminInfoMapper;
+import cn.hotel.entity.AdminDto;
 import cn.hotel.entity.Enum.SysResponse;
 import cn.hotel.entity.model.AdminInfoRequest;
 import cn.hotel.entity.model.AdminInfoResponse;
@@ -70,4 +71,71 @@ public class AdminInfoServiceImpl implements AdminInfoService {
         restModel.setData(count);
         return restModel;
     }
+
+    @Override
+    public RestModel selectAdminInfoRecordById(AdminDto adminDto) {
+        RestModel restModel = new RestModel();
+        AdminDto adminRequest = new AdminDto();
+        if(StringUtils.isNotBlank(adminDto.getAdminId().toString())){
+            AdminDto adminDto1 = adminInfoMapper.selectAdminInfoById(adminDto);
+            restModel.setCode("200");
+            restModel.setMessage("成功");
+            restModel.setData(adminDto1);
+            return restModel;
+        }
+        return restModel;
+    }
+
+    // 管理员信息添加
+    @Override
+    public RestModel adminInfoAdd(AdminDto adminDto) {
+        AdminDto adminRequest = new AdminDto();
+        if(adminDto.getAdminName()!=null && StringUtils.isNotBlank(adminDto.getAdminName())){
+            adminRequest.setAdminName(adminDto.getAdminName());
+        }
+        if(adminDto.getAdminPwd()!=null && StringUtils.isNotBlank(adminDto.getAdminPwd())){
+            adminRequest.setAdminPwd(adminDto.getAdminPwd());
+        }
+        if(adminDto.getAdminRealName()!=null && StringUtils.isNotBlank(adminDto.getAdminRealName())){
+            adminRequest.setAdminRealName(adminDto.getAdminRealName());
+        }
+        if(adminDto.getAdminSex()!=null && StringUtils.isNotBlank(adminDto.getAdminSex())){
+            adminRequest.setAdminSex(adminDto.getAdminSex());
+        }
+        if(adminDto.getAdminBirthday()!=null && StringUtils.isNotBlank(adminDto.getAdminBirthday())){
+            adminRequest.setAdminBirthday(adminDto.getAdminBirthday());
+        }
+        if(adminDto.getAdminNation()!=null && StringUtils.isNotBlank(adminDto.getAdminNation())){
+            adminRequest.setAdminNation(adminDto.getAdminNation());
+        }
+        if(adminDto.getAdminIdCard()!=null && StringUtils.isNotBlank(adminDto.getAdminIdCard().toString())){
+            adminRequest.setAdminIdCard(adminDto.getAdminIdCard());
+        }
+        if(adminDto.getAdminMobile()!=null && StringUtils.isNotBlank(adminDto.getAdminMobile().toString())){
+            adminRequest.setAdminMobile(adminDto.getAdminMobile());
+        }
+        if(adminDto.getAddress()!=null && StringUtils.isNotBlank(adminDto.getAddress())){
+            adminRequest.setAddress(adminDto.getAddress());
+        }
+        if(adminDto.getAdminIdCardType()!=null && StringUtils.isNotBlank(adminDto.getAdminIdCardType())){
+            adminRequest.setAdminIdCardType(adminDto.getAdminIdCardType());
+        }
+        if(adminDto.getAdminIsPostion() !=null && StringUtils.isNotBlank(adminDto.getAdminIsPostion())){
+            adminRequest.setAdminIsPostion(adminDto.getAdminIsPostion());
+        }
+        adminRequest.setCreateTime(System.currentTimeMillis());
+        int count = adminInfoMapper.AdminInfoAdd(adminRequest);
+        if(count >0){
+            restModel.setCode("200");
+            restModel.setMessage("成功");
+            restModel.setData(count);
+        }else{
+            restModel.setCode("300");
+            restModel.setMessage("传入参数不对，调用失败！");
+            restModel.setData("");
+        }
+        return restModel;
+    }
+
+
 }

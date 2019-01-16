@@ -21,4 +21,7 @@ public interface HotelRoomMapper {
     //修改客房信息
     public void updateRoomInfoRecord(Room room);
 
+    //根据id查询客房信息
+    public Room selectRoomInfoById(Room room);
+
 }

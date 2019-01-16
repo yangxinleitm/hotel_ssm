@@ -24,7 +24,7 @@
         <th field="vipPrice" align="center" width="7%">客房价格</th>
         <th field="createTime" align="center" width="11%" formatter="timeStamp2DateTime">创建时间</th>
         <th field="modifyTime" align="center" width="11%"  formatter="timeStamp2DateTime">修改时间</th>
-        <th field="roomDetail" align="center" width="9%">客房详情</th>
+        <th field="opterRoomDetail" align="center" width="9%">客房详情</th>
     </tr>
     </thead>
 </table>
@@ -107,6 +107,7 @@
     <form id="modifyDetail" method="post">
         <table align="center" width="90%" cellpadding="2" cellspacing="2">
             <tr><td></td></tr> <tr><td></td></tr> <tr><td></td></tr>
+            <tr><td><input type="hidden" id="modifyRoomId" name="modifyRoomId"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房编号:<input type="text" id="modifyRoomNo" name="modifyRoomNo" class="easyui-textbox" missingMessage=""validType="length[1,20]" maxlength="20" style="width:120px"></td></tr>
             <tr><td style="font-size: 12px;">&nbsp;&nbsp;&nbsp;&nbsp;客房类型:
                 <select class="easyui-combobox" id="modifyRoomType"  name="modifyRoomType"  panelHeight="auto" editable="false"  style="width:110px" style="font-size: 12px;">
@@ -218,7 +219,7 @@
         });
     }
 
-    //添加管理员信息
+
     function btnAdd() {
         $("#adminDetail").form('clear');        //每次新增之前，清空原数据
         $('#dgAdminDetail').dialog("open").window("center");
@@ -309,6 +310,7 @@
 
     //保存修改的数据
     function modifySave() {
+        var modifyRoomId = $("#modifyRoomId").val();
         var modifyRoomNo = $("#modifyRoomNo").val();
         var modifyRoomType = $("#modifyRoomType").combobox("getValue");
         var modifyIsClean = $("#modifyIsClean").combobox("getValue");
@@ -316,7 +318,6 @@
         var modifyRoomArea = $("#modifyRoomArea").val();
         var modifyIsVip = $("#modifyIsVip").combobox("getValue");
         var modifyVipPrice = $("#modifyVipPrice").val();
-        var modifyIsVip = $("#modifyIsVip").combobox("getValue");
 
         if(modifyRoomNo ==""){
             $.messager.alert("提示","客房编号不能为空!","info");
@@ -338,8 +339,38 @@
             return ;
         }
 
-    }
+        var modifyRoomId = 35;
+        $.post(" /htm/hotelRoomInfoModify.action", {
+            modifyRoomId:modifyRoomId,
+            modifyRoomNo:modifyRoomNo,
+            modifyRoomType: modifyRoomType,
+            modifyIsClean:modifyIsClean,
+            modifyIsLive:modifyIsLive,
+            modifyRoomArea:modifyRoomArea,
+            modifyIsVip:modifyIsVip,
+            modifyVipPrice:modifyVipPrice
+        },function(data){
+            $.messager.progress('close');
+            if (data.status) {
+                $.messager.alert("信息", "添加客房成功", "info");
+                $('#dgAdminDetail').dialog('close');
+                datagridBind();
+            } else {
+                var message = "添加客房失败！";
+                if (data.message != null) {
+                    message = data.message;
+                }
+                $.messager.alert("信息", message, "error");
+            }
+        }, "json");
 
+    }
+    
+    //显示客房详细信息
+    function opterRoomDetail(value,row) {
+        return "<a href=\"javascript:void(0)\" style='color: red' title=\"结算申请\" name=\"operateDetail\" onclick=\"showOperateDetail('\" + row.accountId + \"')\" >" + "点击" + "</a>\";";
+    }
+    
 
     //查询按钮
     function btnSearch() {

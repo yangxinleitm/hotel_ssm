@@ -17,4 +17,6 @@ public class AdminUpdatePwdController {
     public String hotelRoomInfo(HttpServletRequest request){
         return  "hotelDishManagent";
     }
+
+
 }

@@ -62,6 +62,31 @@
     WHERE admin_id=#{adminId,jdbcType=BIGINT}
   </delete>
 
+  <select id="selectAdminInfoById" parameterType="cn.hotel.entity.AdminDto" resultMap="adminInfoMap">
+      SELECT *
+      FROM admin
+      WHERE admin_id =#{adminId}
+  </select>
+
+  <update id="updateAdminInfo" parameterType="cn.hotel.entity.AdminDto" >
+    UPDATE admin
+    SET
+    <if test="admin_name !='' ">admin_name = #{roomNo},</if>
+    <if test="admin_pwd !=''">admin_pwd = #{roomType},</if>
+    <if test="admin_realname !=''">admin_realname = #{isClean},</if>
+    <if test="admin_sex !=''">admin_sex = #{isLive},</if>
+    <if test="admin_birthday !=''">admin_birthday = #{roomArea},</if>
+    <if test="admin_nation !=''">admin_nation =#{isVip},</if>
+    <if test="admin_idcard !=''">admin_idcard=#{vipPrice},</if>
+    <if test="modifyTime !=''">modify_time=#{modifyTime}</if>
+    WHERE room_id = #{roomId}
+  </update>
+
+  <insert id="AdminInfoAdd" parameterType="cn.hotel.entity.AdminDto">
+      INSERT
+      INTO admin(admin_name,admin_pwd,admin_realname,admin_sex,admin_birthday,admin_nation,admin_idcard,admin_mobile,admin_address,admin_idcardType,admin_ispostion,create_time)
+      VALUES(#{adminName},#{adminPwd},#{adminRealName},#{adminSex},#{adminBirthday},#{adminNation},#{adminIdCard},#{adminMobile},#{address},#{adminIdCardType},#{adminIsPostion},#{createTime})
+  </insert>
 
 
 </mapper>

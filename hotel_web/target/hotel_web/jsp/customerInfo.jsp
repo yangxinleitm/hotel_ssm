@@ -14,15 +14,15 @@
     <thead>
     <tr>
         <th field="select" align="center" checkbox="true">选择</th>
-        <th field="userId" align="center" width="8%">用户ID</th>
+        <th field="userId" align="center" width="6%">用户ID</th>
         <th field="userName" align="center" width="6%">用户名</th>
         <th field="userPassword" align="center" width="7%">用户密码</th>
-        <th field="userRealName" align="center" width="7%">用户真实姓名</th>
-        <th field="userNation" align="center" width="6%">民族</th>
-        <th field="userIdCard" align="center" width="12%">身份证</th>
-        <th field="userMobile" align="center" width="8%">手机号</th>
+        <th field="userRealName" align="center" width="7%" formatter="showRealName">用户真实姓名</th>
+        <th field="userNation" align="center" width="7%">民族</th>
+        <th field="userIdCard" align="center" width="10%" formatter="showUserIdCard">身份证</th>
+        <th field="userMobile" align="center" width="7%" formatter="showUserMobile">手机号</th>
         <th field="userIdCardType" align="center" width="7%" formatter="showUserIdCardType">身份证类型</th>
-        <th field="isVip" align="center" width="7%" formatter="showIsVip">是否为VIP用户</th>
+        <th field="isVip" align="center" width="9%" formatter="showIsVip">是否为VIP用户</th>
         <th field="createTime" align="center" width="11%" formatter="timeStamp2DateTime">创建时间</th>
         <th field="modifyTime" align="center" width="11%" formatter="timeStamp2DateTime">修改时间</th>
         <th field="option" align="center" width="9%">操作</th>
@@ -74,8 +74,6 @@
 
     $(function(){
 
-
-        //经与宋杰讨论，创建时间默认为当天
         $("#createTimeStart").datebox("setValue", currNDate(0));//默认时间为当天
         $("#crateTimeEnd").datebox("setValue", currNDate(0));//默认时间为当天
 
@@ -145,6 +143,31 @@
         date.setDate(date.getDate() - n);//设置n天前
         var currTime = dateTimeFormat(date);
         return currTime.substring(0, 10);
+    }
+
+    function showRealName(value) {
+        if(value !=null && value !=""){
+            var hiddenValue = value.toString().substring(1,value.length);
+            var hiddenValue = "**";
+            return value.toString().substring(0,1)+hiddenValue;
+        }
+    }
+    function showUserIdCard(value) {
+        if(value !=null && value !=""){
+            var hiddenValue = value.toString().substring(6,14);
+            var hiddenValue = "****";
+            var beforeValue = value.toString().substring(0,6);
+            return beforeValue+hiddenValue+value.toString().substring(14,value.length);
+        }
+    }
+
+    function showUserMobile(value) {
+        if(value !="" && value !=null){
+            var hiddenValue = value.toString().substring(4,8);
+            var hiddenValue = "****";
+            var beforeValue = value.toString().substring(0,4);
+            return beforeValue+hiddenValue+value.toString().substring(8,value.length);
+        }
     }
 
 

@@ -19,4 +19,8 @@ public interface HotelRoomService {
     //修改客房信息
     public RestModel  updateRoomInfoRecord(Room room);
 
+    //按照id进行查询
+    public RestModel  selectRoomInfoById(Room room);
+
+
 }

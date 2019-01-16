@@ -1,5 +1,6 @@
 package cn.hotel.service;
 
+import cn.hotel.entity.AdminDto;
 import cn.hotel.entity.model.AdminInfoRequest;
 import cn.hotel.service.utils.RestModel;
 
@@ -14,5 +15,11 @@ public interface AdminInfoService {
 
     //删除离职员工的数据
     public RestModel deleteAdminInfoRecord(Map<String,Object> map);
+
+    //按照id查询管理员信息
+    public RestModel selectAdminInfoRecordById(AdminDto adminDto);
+
+    public RestModel adminInfoAdd(AdminDto adminDto);
+
 }
 

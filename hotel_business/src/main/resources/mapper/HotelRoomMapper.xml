@@ -56,18 +56,22 @@
   <update id="updateRoomInfoRecord" parameterType="cn.hotel.entity.Room">
     UPDATE room
     SET
-      <if test="roomNo !='' ">room_no=#{roomNo},</if>
+      <if test="roomNo !='' ">room_no = #{roomNo},</if>
       <if test="roomType !=''">room_Type = #{roomType},</if>
       <if test="isClean !=''">is_clean = #{isClean},</if>
       <if test="isLive !=''">is_live = #{isLive},</if>
       <if test="roomArea !=''">room_area = #{roomArea},</if>
-      <if test="roomDetail !=''">room_detail =#{roomDetail}</if>
-      <if test="isVip !=''">is_vip =#{isVip}</if>
-      <if test="vip_price !=''">vip_price=#{vipPrice}</if>
-      <if test="createTime !=''">create_time = #{createTime}</if>
-      <if test="modifyTime !=''">modify_time = #{modifyTime}</if>
+      <if test="isVip !=''">is_vip =#{isVip},</if>
+      <if test="vipPrice !=''">vip_price=#{vipPrice},</if>
+      <if test="modifyTime !=''">modify_time=#{modifyTime}</if>
     WHERE room_id = #{roomId}
   </update>
+
+  <select id="selectRoomInfoById" parameterType="cn.hotel.entity.Room" resultMap="roomMap">
+      SELECT *
+      FROM room
+      WHERE room_id=#{roomId}
+  </select>
 
 
 </mapper>

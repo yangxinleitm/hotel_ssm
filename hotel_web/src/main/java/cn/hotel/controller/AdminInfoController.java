@@ -72,56 +72,71 @@ public class AdminInfoController {
 
 
     //添加记录
-    @RequestMapping(value = "",method = RequestMethod.POST)
+    @RequestMapping(value = "/htm/adminInfoAdd.action",method = RequestMethod.POST)
     @ResponseBody
-    public JsonModel adminUserAdd(HttpServletRequest request,@RequestParam(value = "adminId",required = true) String adminId,
-                                                             @RequestParam(value = "adminName",required = true) String adminName,
+    public JsonModel adminUserAdd(HttpServletRequest request,@RequestParam(value = "adminName",required = true) String adminName,
                                                              @RequestParam(value = "adminPwd",required = true) String adminPwd,
                                                              @RequestParam(value = "adminRealName",required = true) String adminRealName,
-                                                             @RequestParam(value = "adminIdCard",required = true) String adminIdCard,
-                                                             @RequestParam(value = "adminIdType",required = true) String adminIdType,
+                                                             @RequestParam(value = "adminSex",required = true) String adminSex,
+                                                             @RequestParam(value = "adminBirthday",required = true) String adminBirthday,
                                                              @RequestParam(value = "adminNation",required = true) String adminNation,
-                                                             @RequestParam(value = "createTime",required = true) String createTime,
-                                                             @RequestParam(value = "adminAdress",required = true) String adminAdress){
+                                                             @RequestParam(value = "adminIdCard",required = true) String adminIdCard,
+                                                             @RequestParam(value = "adminMobile",required = true) String adminMobile,
+                                                             @RequestParam(value = "adminAdress",required = true) String adminAdress,
+                                                             @RequestParam(value = "adminIdType",required = true) String adminIdType,
+                                                             @RequestParam(value = "adminIspostion",required = true)String adminIsPostion){
         JsonModel jsonModel = new JsonModel();
-        if(StringUtils.isBlank(adminId)
-            || StringUtils.isBlank(adminName)
-            || StringUtils.isBlank(adminPwd)
-            || StringUtils.isBlank(adminNation)
-            || StringUtils.isBlank(adminRealName)
-            || StringUtils.isBlank(adminIdCard)
-            || StringUtils.isBlank(adminIdType)
-            || StringUtils.isBlank(createTime)
-            || StringUtils.isBlank(adminAdress)){
+        if(StringUtils.isEmpty(adminName)
+            || StringUtils.isEmpty(adminPwd)
+            || StringUtils.isEmpty(adminRealName)
+            || StringUtils.isEmpty(adminSex)
+            || StringUtils.isEmpty(adminBirthday)
+            || StringUtils.isEmpty(adminNation)
+            || StringUtils.isEmpty(adminIdCard)
+            || StringUtils.isEmpty(adminMobile)
+            || StringUtils.isEmpty(adminAdress)
+            || StringUtils.isEmpty(adminIdType)
+            || StringUtils.isEmpty(adminIsPostion)){
+            jsonModel.setStatus(false);
+            jsonModel.setMessage("所传入的参数不能为空！");
+            return jsonModel;
         }
-        jsonModel.setStatus(false);
-        jsonModel.setMessage("所传参数不能为空！");
-        return jsonModel;
 
-//        Map <String, Object> map = AddAdminUserInfo(adminId, adminName, adminPwd, adminNation,
-//                adminRealName, adminIdCard, adminIdType, createTime, adminAdress);
-//        logger.info("添加操作记录的时间传入的参数 param={}",JSON.toJSONString(map));
-//        RestModel restModel = adminInfoService.addAdminUserInfo(map);
-
+        //数据封装
+        AdminDto adminRequest = converData(adminName, adminPwd, adminRealName, adminSex, adminBirthday, adminNation,
+                adminIdCard, adminMobile, adminAdress, adminIdType, adminIsPostion);
+        logger.info("新增管理员信息传入参数 param={}",JSON.toJSONString(adminRequest));
+        RestModel restModel = adminInfoService.adminInfoAdd(adminRequest);
+        if(RestModel.CODE_SUCCESS.toString().equals(restModel.getCode().toString())){
+            jsonModel.setStatus(true);
+            jsonModel.setMessage("添加成功");
+            jsonModel.setResult(restModel.getData());
+            return jsonModel;
+        }else{
+            jsonModel.setStatus(false);
+            jsonModel.setMessage("添加失败");
+            return jsonModel;
+        }
 
     }
 
-    private Map<String,Object> AddAdminUserInfo(String adminId, String adminName, String adminPwd, String adminNation, String adminRealName, String adminIdCard,
-                                  String adminIdType, String createTime, String adminAdress) {
-        Map <String, Object> map = new HashMap <String, Object>();
-        map.put("adminId",adminId);
-        map.put("adminName",adminName);
-        map.put("adminPwd",adminPwd);
-        map.put("adminNation",adminNation);
-        map.put("adminRealName",adminRealName);
-        map.put("adminIdCard",adminIdCard);
-        map.put("adminIdType",adminIdType);
-        map.put("createTime",createTime);
-        map.put("adminAdress",adminAdress);
-        return map;
+    public AdminDto converData(String adminName,String adminPwd,String adminRealName,String adminSex,String adminBirthday,String adminNation,
+                               String adminIdCard,String adminMobile,String adminAdress,String adminIdType,String adminIsPostion){
+        AdminDto adminInfoRequest = new AdminDto();
+        adminInfoRequest.setAdminName(adminName);
+        adminInfoRequest.setAdminPwd(adminPwd);
+        adminInfoRequest.setAdminRealName(adminRealName);
+        adminInfoRequest.setAdminSex(adminSex);
+        adminInfoRequest.setAdminBirthday(adminBirthday);
+        adminInfoRequest.setAdminNation(adminNation);
+        adminInfoRequest.setAdminIdCard(Long.valueOf(adminIdCard));
+        adminInfoRequest.setAdminMobile(Long.valueOf(adminMobile));
+        adminInfoRequest.setAddress(adminAdress);
+        adminInfoRequest.setAdminIdCardType(adminIdType);  //身份类型
+        adminInfoRequest.setAdminIsPostion(adminIsPostion);
+
+        return adminInfoRequest;
     }
-
-
 
     //导出数据文件
     @RequestMapping(value = "/htm/exportAdminUserInfoFile.action",method = RequestMethod.POST)
@@ -168,6 +183,21 @@ public class AdminInfoController {
             }
         }
         return jsonModel;
+    }
+
+
+
+    //根据id查询
+    @RequestMapping(value = "/htm/adminById.action",method = RequestMethod.GET)
+    @ResponseBody
+    public PagerModel<AdminDto> selectAdminById(HttpServletRequest request){
+        PagerModel <AdminDto> pager = new PagerModel <>();
+        AdminDto adminDto = new AdminDto();
+        adminDto.setAdminId(Long.valueOf(10101));
+        RestModel restModel = adminInfoService.selectAdminInfoRecordById(adminDto);
+
+
+        return pager;
     }
 
 

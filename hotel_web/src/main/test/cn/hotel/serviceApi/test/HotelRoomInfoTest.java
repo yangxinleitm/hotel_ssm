@@ -3,6 +3,7 @@ package cn.hotel.serviceApi.test;
 import cn.hotel.business.HotelRoomMapper;
 import cn.hotel.entity.Room;
 import cn.hotel.service.HotelRoomService;
+import cn.hotel.service.utils.RestModel;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,15 @@ public class HotelRoomInfoTest {
         map.put("modifyTime",System.currentTimeMillis());
         map.put("remark","测试");
         mapper.addHotelRoomInfoRecrd(map);
+    }
+
+
+    @Test
+    public void selectRoomById(){
+        Room room = new Room();
+        room.setRoomId(35);
+        Room room1 = mapper.selectRoomInfoById(room);
+        System.out.println(room1);
     }
 
 }
