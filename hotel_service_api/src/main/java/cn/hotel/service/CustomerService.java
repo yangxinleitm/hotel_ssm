@@ -19,4 +19,6 @@ public interface CustomerService {
     //根据id查询用户详情
     public RestModel selectCustomerByPrimkey(CustomerDto customerDto);
 
+
+
 }

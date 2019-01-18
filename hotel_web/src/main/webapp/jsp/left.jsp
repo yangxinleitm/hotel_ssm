@@ -27,7 +27,8 @@
         <label for="group-2">酒店事务管理</label>
         <ul>
             <li><a href="/htm/hotel/hotelRoomInfo.action"  target="main">酒店客房信息</a></li>
-            <li><a href="/htm/hotel/hotelMaterial.action"  target="main">酒店器材管理</a></li>
+            <li><a href="/htm/hotel/hotelIsLive.action"  target="main">客房入住情况统计</a></li>
+<%--            <li><a href="/htm/hotel/hotelMaterial.action"  target="main">酒店器材管理</a></li>--%>
             <li><a href="/htm/hotel/hotelDishManagent.action"  target="main">菜品管理</a></li>
         </ul>
     </li>

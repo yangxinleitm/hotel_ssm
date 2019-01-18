@@ -3,6 +3,7 @@
 <mapper namespace="cn.hotel.business.CustomerMapper">
   <resultMap id="customerMap" type="cn.hotel.entity.CustomerDto">
     <id column="user_id"  property="userId"/>
+    <result column="room_id" property="roomId"></result>
     <result column="user_name"  property="userName"/>
     <result column="user_pwd" property="userPassword"/>
     <result column="user_realname"  property="userRealName"/>
@@ -45,7 +46,7 @@
     <where>
       <include refid="whereParam"/>
     </where>
-    ORDER BY create_time DESC
+    ORDER BY user_id ASC
     limit #{pageNumber},#{pageSize}
   </select>
 

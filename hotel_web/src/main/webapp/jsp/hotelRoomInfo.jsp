@@ -16,15 +16,14 @@
         <th field="select" align="center" checkbox="true">选择</th>
         <th field="roomId" align="center" width="8%">客房ID</th>
         <th field="roomNo" align="center" width="11%">客房编号</th>
-        <th field="roomType" align="center" width="7%" formatter="showRoomType">客房类型</th>
-        <th field="isClean" align="center" width="7%" formatter="showIsClean">是否已打扫</th>
-        <th field="isLive" align="center" width="6%" formatter="showIsLive">是否已居住</th>
+        <th field="roomType" align="center" width="9%" formatter="showRoomType">客房类型</th>
+        <th field="isClean" align="center" width="9%" formatter="showIsClean">是否已打扫</th>
         <th field="roomArea" align="center" width="12%" formatter="showRoomArea">客房面积</th>
-        <th field="isVip" align="center" width="8%" formatter="showIsVip">是否为VIP客房</th>
-        <th field="vipPrice" align="center" width="7%">客房价格</th>
+        <th field="isVip" align="center" width="9%" formatter="showIsVip">是否为VIP客房</th>
+        <th field="vipPrice" align="center" width="9%">客房价格</th>
+        <th field="isLive" align="center" width="7%" formatter="showIsLive">是否满房</th>
         <th field="createTime" align="center" width="11%" formatter="timeStamp2DateTime">创建时间</th>
         <th field="modifyTime" align="center" width="11%"  formatter="timeStamp2DateTime">修改时间</th>
-        <th field="opterRoomDetail" align="center" width="9%">客房详情</th>
     </tr>
     </thead>
 </table>
@@ -44,7 +43,6 @@
             <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="btnSearch()">查询</a>
         </div>
         <div width="100%" style="margin:4px">
-            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnHotelRoomDetail()">客房详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">添加客房</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-edit" onclick="btnModifyHotelRoom()">修改客房信息</a>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>

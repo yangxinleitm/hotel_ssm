@@ -10,7 +10,7 @@
 <body style="margin:0px;">
 
 <table id="dg" class="easyui-datagrid" title="用户管理 -- 用户信息管理" singleSelect="true" fitColumns="true" nowrap="false" striped="true"
-       SelectOnCheck="true" CheckOnSelect="true" rownumbers="true" pagination="true" pageSize="50" pageList="[50, 100, 200]" toolbar="#tb" fit="true">
+       SelectOnCheck="true" CheckOnSelect="true" rownumbers="true" pagination="true" pageSize="25" pageList="[25, 50, 150]" toolbar="#tb" fit="true">
     <thead>
     <tr>
         <th field="select" align="center" checkbox="true">选择</th>

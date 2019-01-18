@@ -55,8 +55,6 @@ public class CustomerServiceimpl implements CustomerService {
         restModel.setCode("200");
         restModel.setMessage("成功");
         restModel.setData(customerMapper.selectCustomerByPrimkey(customerDto));
-
-
         return restModel;
     }
 

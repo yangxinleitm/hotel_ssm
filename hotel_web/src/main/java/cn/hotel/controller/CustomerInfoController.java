@@ -66,13 +66,13 @@ public class CustomerInfoController {
         Map <String, Object> param = new HashMap <>();
         String pageSize = request.getParameter("pageSize");
         if (StringUtils.isNotBlank(pageSize)) {
-            param.put("pageSize",pageSize);
+            param.put("pageSize",Integer.valueOf(pageSize));
         } else {
-            param.put("pageSize",50);
+            param.put("pageSize",25);
         }
         String pageNumber = request.getParameter("pageNumber");
         if (StringUtils.isNotBlank(pageNumber)) {
-            if (Integer.valueOf(pageNumber) <= 0) {
+            if (Integer.valueOf(pageNumber) <= 1) {
                 param.put("pageNumber",0);
             } else {
                 param.put("pageNumber",(Long.valueOf(pageNumber) - 1) * Long.valueOf(pageSize));

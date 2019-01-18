@@ -1,15 +1,14 @@
 package cn.hotel.serviceApi.test;
 
-import cn.hotel.business.AdminInfoMapper;
+import cn.hotel.business.CustomerOrderMapper;
 import cn.hotel.entity.AdminDto;
 import cn.hotel.entity.CustomerDto;
-import cn.hotel.entity.Enum.SysResponse;
+import cn.hotel.entity.CustomerOrder;
 import cn.hotel.entity.model.AdminInfoRequest;
 import cn.hotel.service.AdminInfoService;
-import cn.hotel.service.CustomerService;
 import cn.hotel.service.utils.RestModel;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.SystemUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,5 +59,16 @@ public class AdminInfoTest {
         RestModel restModel = adminInfoService.selectAdminInfoRecordById(adminDto);
         System.out.println(restModel);
     }
+
+    @Autowired
+    private CustomerOrderMapper customerOrderMapper;
+
+    @Test
+    public void test01(){
+        CustomerOrder customerOrder = customerOrderMapper.selectByPrimaryKey(1);
+        System.out.println(JSON.toJSONString(customerOrder));
+    }
+
+
 
 }

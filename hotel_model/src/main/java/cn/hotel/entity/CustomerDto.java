@@ -9,6 +9,7 @@ import cn.hotel.entity.model.BaseRequest;
 public class CustomerDto extends BaseRequest {
 
     private Long userId;
+    private Integer roomId;
     private String userName;
     private String userPassword;
     private String userRealName;
@@ -26,6 +27,14 @@ public class CustomerDto extends BaseRequest {
     private Long modifyTime;
 
     public CustomerDto() {
+    }
+
+    public Integer getRoomId() {
+        return roomId;
+    }
+
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
     }
 
     public Long getUserId() {
@@ -160,6 +169,7 @@ public class CustomerDto extends BaseRequest {
     public String toString() {
         return "CustomerDto{" +
                 "userId=" + userId +
+                ", roomId=" + roomId +
                 ", userName='" + userName + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", userRealName='" + userRealName + '\'' +
