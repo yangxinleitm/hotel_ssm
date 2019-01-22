@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.StreamSupport;
 
 /**
 
@@ -190,11 +191,9 @@ public class HotelRoomIsLiveCountController {
         return param;
     }
 
-    public static void  main(String[] args){
-        for(int i=0;i<10;i++){
-            UUID uuid = UUID.randomUUID();
-            System.out.println(uuid);
-        }
+    public static void main(String[] args){
+        UUID uuid = UUID.randomUUID();
+        System.out.println(uuid);
     }
 
 }

@@ -4,12 +4,10 @@ import cn.hotel.service.utils.DateUtils;
 import cn.hotel.service.utils.RestModel;
 import cn.hotel.entity.model.CustomerInfoResponse;
 import cn.hotel.entity.model.PagerModel;
-import cn.hotel.service.CustomerService;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class CustomerInfoController {
+public class CustomerInfoController extends BaseController{
 
     private static final Logger logger = LoggerFactory.getLogger(CustomerInfoController.class);
 
@@ -29,9 +27,6 @@ public class CustomerInfoController {
     public String customerInfo(HttpServletRequest request){
         return  "customerInfo";
     }
-
-    @Autowired
-    private CustomerService  customerService;
 
     //用户信息列表展示
     @RequestMapping(value = "/htm/customerList.action",method = RequestMethod.GET)
@@ -47,7 +42,6 @@ public class CustomerInfoController {
         logger.info("用户信息查询返回结果 param={}", JSON.toJSONString(restModel));
         List data = (List) restModel.getData();
         if(restModel.getCode().equals(SysResponse.RECORD_CODE.RESPONSE_SUCCESS.get().toString())){
-
             logger.info("用户信息查询参数 param={}", JSON.toJSONString(param));
             restModel = customerService.countCustomerInfoRecord(param);
             logger.info("用户信息查询返回结果 param={}", JSON.toJSONString(restModel));

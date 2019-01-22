@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: cn.hotel.serviceApi.test.CustomerTest
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.315 s - in cn.hotel.serviceApi.test.CustomerTest

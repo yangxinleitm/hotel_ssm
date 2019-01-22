@@ -34,9 +34,7 @@ public class CustomerTest {
             List<CustomerDto> list= (List)restModel.getData();
             System.out.println(list);
         }
-
     }
-
 
     //客户列表展示
     @Test

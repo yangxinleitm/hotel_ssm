@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-
 * @Description:    酒店事务管理 -- 酒店客房信息
 * @Author:         yangxinlei
 * @CreateDate:     2019/1/10 13:52
@@ -42,8 +41,7 @@ public class HotelRoomInfoController extends BaseController {
         return  "hotelRoomInfo";
     }
 
-    @Autowired
-    private HotelRoomService hotelRoomService;
+
 
 
     //酒店客房信息列表展示

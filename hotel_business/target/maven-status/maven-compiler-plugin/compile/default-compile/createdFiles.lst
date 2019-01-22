@@ -1,2 +1,5 @@
 cn\hotel\business\CustomerMapper.class
+cn\hotel\business\HotelRoomMapper.class
 cn\hotel\business\AdminInfoMapper.class
+cn\hotel\business\CustomerOrderMapper.class
+cn\hotel\business\HotelMaterialMapper.class

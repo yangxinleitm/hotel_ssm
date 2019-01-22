@@ -28,28 +28,36 @@
        <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                    <span style="color: white">登录人:<span style="color: #00ee00">【${admin.userName}】</span></span>
+                    <span style="color: white">登录人:<span style="color: #00ee00">【${sessionScope.admin.adminName}】</span></span>
                 </a>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false" onclick="Logout();">
-                    <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
-                </a>
+                <a class="dropdown-toggle" data-toggle="" href="javascript:void(0)" onclick="exitSys()" aria-expanded="false">退出</a>
             </li>
         </ul>
     </nav>
 </div>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-easyui-1.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-easyui-1.5/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/echarts.min.js"></script>
 
 <script type="text/javascript">
-    function Logout() {
+    function exitSys() {
+       /*  var flag = window.confirm("确认退出系统吗?");
+        if (flag) {
+            window.top.open('', '_parent', '');
+            window.top.close();
+        }
+*/
+        location.href="/admin/adminUser/logout.action";
+        //如果你使用的是firefox浏览器必须要做以下设置
+        //1、在地址栏输入about:config然后回车，警告确认
+        //2、在过滤器中输入dom.allow_scripts_to_close_windows，双击即可将此值设为true 即可完成了
 
     }
 </script>
-
-<script src="${pageContext.request.contextPath}/jsp/assets/js/jquery-1.10.2.js"></script>
-<script src="${pageContext.request.contextPath}/jsp/assets/js/bootstrap.min.js"></script>
-<script src="${pageContext.request.contextPath}/jsp/assets/js/morris/raphael-2.1.0.min.js"></script>
-
 
 </body>
 </html>

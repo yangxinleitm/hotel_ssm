@@ -9,13 +9,13 @@
 </head>
 <body style="margin:0px;">
 
-<table id="dg" class="easyui-datagrid" title="酒店事务管理 -- 酒店器材管理 " singleSelect="true" fitColumns="true" nowrap="false" striped="true"
+<table id="dg" class="easyui-datagrid" title="酒店事务管理 -- 酒店菜品管理 " singleSelect="true" fitColumns="true" nowrap="false" striped="true"
        SelectOnCheck="true" CheckOnSelect="true" rownumbers="true" pagination="true" pageSize="50" pageList="[50, 100, 200]" toolbar="#tb" fit="true">
     <thead>
     <tr>
         <th field="select" align="center" checkbox="true">选择</th>
-        <th field="materialsId" align="center" width="8%">器材Id</th>
-        <th field="parentId" align="center" width="11%">所属父类</th>
+        <th field="materialsId" align="center" width="8%">菜品名称</th>
+        <th field="parentId" align="center" width="11%">菜品</th>
         <th field="materialTypeNnameEn" align="center" width="7%" formatter="showRoomType">器材类型</th>
         <th field="materialTypeName" align="center" width="7%" formatter="showIsClean">类别名称</th>
         <th field="materialTypeCode" align="center" width="6%" formatter="showIsLive">器材编码</th>
@@ -32,14 +32,15 @@
         <input type="hidden" name="pageSize" id="pageSize" />
         <input type="hidden" name="pageNumber" id="pageNumber" />
         <div width="100%" style="margin:4px">
-            器材类型:<input type="text" id="roomId" name="roomId" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
-            器材编码:<input type="text" id="isVip" name="isVip" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
+            菜品名称:<input type="text" id="roomId" name="roomId" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
+            价格区间:<input type="text" id="isVip" name="isVip" class="easyui-textbox" maxlength="20" style="width:150px"/>&nbsp;&nbsp;
             创建时间：<input class="easyui-datebox" id="createTimeStart" name="createTimeStart" type="text" editable="false"> --
             <input class="easyui-datebox" id="crateTimeEnd" name="crateTimeEnd" type="text" editable="false">&nbsp;&nbsp;
             <a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="btnSearch()">查询</a>
         </div>
         <div width="100%" style="margin:4px">
-            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">客房详情</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">菜品信息上传</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="easyui-linkbutton" style="margin-bottom: 2px;margin-top:  5px;" iconCls="icon-add" onclick="btnAdd()">菜品信息修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
         </div>
     </form>
 </div>

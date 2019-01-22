@@ -1,0 +1,10 @@
+-------------------------------------------------------------------------------
+Test set: cn.hotel.serviceApi.test.RedisTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.993 s <<< FAILURE! - in cn.hotel.serviceApi.test.RedisTest
+testJedis(cn.hotel.serviceApi.test.RedisTest)  Time elapsed: 1.993 s  <<< ERROR!
+redis.clients.jedis.exceptions.JedisConnectionException: java.net.SocketTimeoutException: connect timed out
+	at cn.hotel.serviceApi.test.RedisTest.testJedis(RedisTest.java:10)
+Caused by: java.net.SocketTimeoutException: connect timed out
+	at cn.hotel.serviceApi.test.RedisTest.testJedis(RedisTest.java:10)
+
