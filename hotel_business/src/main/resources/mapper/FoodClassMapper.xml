@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hotel.business.FoodClassMapper" >
+  <resultMap id="BaseResultMap" type="cn.hotel.entity.FoodClassDto" >
+    <id column="food_class_id" property="foodClassId" jdbcType="BIGINT" />
+    <result column="food_class_no" property="foodClassNo" jdbcType="VARCHAR" />
+    <result column="food_subject_id" property="foodSubjectId" jdbcType="VARCHAR" />
+    <result column="food_class_name" property="foodClassName" jdbcType="VARCHAR" />
+    <result column="apply_user_id" property="applyUserId" jdbcType="BIGINT" />
+    <result column="auth_user_id" property="authUserId" jdbcType="BIGINT" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
+  </resultMap>
+
+    <!--时间区间 左闭右开-->
+    <sql id="whereParam">
+        <if test="createTimeStart != null" >
+            AND create_time &gt;= #{createTimeStart,jdbcType=BIGINT}
+        </if>
+        <if test="createTimeEnd != null" >
+            AND create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
+        </if>
+    </sql>
+
+
+  <select id="selectAllFoodClass" parameterType="java.util.Map" resultMap="BaseResultMap">
+      SELECT *
+      FROM food_class
+      <where>
+          <include refid="whereParam"/>
+      </where>
+      ORDER BY food_class_id ASC
+      limit #{pageNumber},#{pageSize}
+  </select>
+
+  <select id="countFoodClass" parameterType="java.util.Map" resultType="int">
+      SELECT COUNT(*) FROM food_class
+  </select>
+
+  <update id="updateFoodClass" parameterType="cn.hotel.entity.FoodClassDto">
+    UPDATE food_class
+      SET
+      <if test="isDelete !='' ">is_delete = #{isDelete},</if>
+      <if test="modifyTime !=''">modify_time = #{modifyTime}</if>
+      WHERE food_class_id = #{foodClassId}
+  </update>
+
+    <insert id="foodClasAdd" parameterType="cn.hotel.entity.FoodClassDto">
+        INSERT INTO
+        food_class(food_class_id,food_class_no,food_subject_id,food_class_name,apply_user_id,auth_user_id,is_delete,create_time,modify_time)
+        VALUES (#{foodClassId},#{foodClassNo},#{foodSubjectId},#{foodClassName},#{applyUserId},#{authUserId},#{isDelete},#{createTime},#{modifyTime})
+    </insert>
+
+</mapper>

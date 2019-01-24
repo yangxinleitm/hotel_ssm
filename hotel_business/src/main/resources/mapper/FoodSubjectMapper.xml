@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.hotel.business.FoodSubjectMapper" >
+  <resultMap id="BaseResultMap" type="cn.hotel.entity.FoodSubjectDto" >
+    <id column="food_subject_id" property="foodSubjectId" jdbcType="VARCHAR" />
+    <result column="food_subject_no" property="foodSubjectNo" jdbcType="VARCHAR" />
+    <result column="food_subject_name" property="foodSubjectName" jdbcType="VARCHAR" />
+    <result column="food_id" property="foodId" jdbcType="VARCHAR" />
+    <result column="apply_user_id" property="applyUserId" jdbcType="BIGINT" />
+    <result column="auth_user_id" property="authUserId" jdbcType="BIGINT" />
+    <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="modify_time" property="modifyTime" jdbcType="BIGINT" />
+  </resultMap>
+
+    <!--时间区间 左闭右开-->
+    <sql id="whereParam">
+        <if test="foodSubjectId !=null">
+            AND food_subject_id = #{foodSubjectId,jdbcType=BIGINT}
+        </if>
+        <if test="createTimeStart != null" >
+            AND create_time &gt;= #{createTimeStart,jdbcType=BIGINT}
+        </if>
+        <if test="createTimeEnd != null" >
+            AND create_time &lt; #{createTimeEnd,jdbcType=BIGINT}
+        </if>
+    </sql>
+
+
+  <select id="selectFoodSubjectRecord" parameterType="java.util.Map" resultMap="BaseResultMap">
+      SELECT *
+      FROM food_subject
+      <where>
+          <include refid="whereParam"/>
+      </where>
+      ORDER BY food_subject_id ASC
+      limit #{pageNumber},#{pageSize}
+  </select>
+
+  <select id="countFoodSubjectRecord" parameterType="java.util.Map" resultType="int">
+      SELECT COUNT(*) FROM food_subject
+  </select>
+
+</mapper>

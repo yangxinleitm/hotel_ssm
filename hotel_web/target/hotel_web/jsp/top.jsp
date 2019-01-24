@@ -1,15 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>宜家酒店后台管理系统</title>
-        <link href="${pageContext.request.contextPath}/jsp/assets/css/bootstrap.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/jsp/assets/css/font-awesome.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/jsp/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
-        <link href="${pageContext.request.contextPath}/jsp/assets/css/custom-styles.css" rel="stylesheet" />
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>宜家酒店后台管理系统</title>
+    <link href="${pageContext.request.contextPath}/jsp/assets/css/bootstrap.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/jsp/assets/css/font-awesome.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/jsp/assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/jsp/assets/css/custom-styles.css" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <script type="text/javascript">
+        function time(){
+            var vWeek,vWeek_s,vDay;
+            vWeek = ["周日","周一","周二","周三","周四","周五","周六"];
+            var date =  new Date();
+            year = date.getFullYear();
+            month = date.getMonth() + 1;
+            day = date.getDate();
+            hours = date.getHours();
+            minutes = date.getMinutes();
+            seconds = date.getSeconds();
+            vWeek_s = date.getDay();
+            document.getElementById("time").innerHTML = year + "年" + month + "月" + day + "日" + "\t" + hours + ":" + minutes +":" + seconds + "\t" + vWeek[vWeek_s] ;
+
+        };
+        setInterval("time()",1000);
+        </script>
     </head>
 </head>
 <body>
@@ -32,7 +48,8 @@
                 </a>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="" href="javascript:void(0)" onclick="exitSys()" aria-expanded="false">退出</a>
+                <span style="color: white" id="time"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <%--<a class="dropdown-toggle" data-toggle="" href="javascript:void(0)" onclick="exitSys()" aria-expanded="false">退出</a>--%>
             </li>
         </ul>
     </nav>
@@ -55,7 +72,6 @@
         //如果你使用的是firefox浏览器必须要做以下设置
         //1、在地址栏输入about:config然后回车，警告确认
         //2、在过滤器中输入dom.allow_scripts_to_close_windows，双击即可将此值设为true 即可完成了
-
     }
 </script>
 

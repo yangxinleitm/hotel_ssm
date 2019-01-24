@@ -9,8 +9,7 @@
 </head>
 <body style="margin:0px;">
 
-<table id="dg" class="easyui-datagrid" title="基础设置 -- 修改密码 " singleSelect="true" fitColumns="true" nowrap="false" striped="true"
-       SelectOnCheck="true" CheckOnSelect="true" rownumbers="true" pagination="true" pageSize="50" pageList="[50, 100, 200]" toolbar="#tb" fit="true">
+<table id="dg" class="easyui-datagrid" title="基础设置 -- 修改密码 " singleSelect="true" fitColumns="true" nowrap="false" striped="true">
     <thead>
     </thead>
 </table>
@@ -36,7 +35,6 @@
         <a href="javascript:void(0)"  class="easyui-linkbutton"  onclick="javascript:$('#dgAdminPwd').dialog('close')" iconcls="icon-cancel">取消</a>
     </div>
 </div>
-
 
 
 <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
@@ -72,7 +70,7 @@
         //session中的adminNanme
         var adminName = $("#adminName").val();
         if(adminName !=""){
-            $.post(" /htm/base/adminUpdatePwd.action", {
+            $.post(" /htm/base/initAdminData.action", {
                 adminName:adminName
             },function(data){
                 $.messager.progress('close');
@@ -83,15 +81,13 @@
 
         }
     }
-    
+
+    //修改密码操作
     function btnsave() {
-        var adminIdSession = $("#adminId1").val();
         var adminId = $("#adminId").val();
         var adminRealName = $("#adminRealName").val();
         var originalAdminPwd = $("#originalAdminPwd").val();
         var newAdminPwd = $("#newAdminPwd").val();
-        var adminName = $("#adminName").val();
-
 
         if(adminId ==""){
             $.messager.alert("信息","管理员ID不能为空，请重新填写完整","info");
@@ -102,10 +98,46 @@
         }else if(originalAdminPwd ==""){
             $.messager.alert("信息","原始密码不能为空，请重新填写完整","info");
             return ;
-        }else if(newAdminPwd ==""){
-            $.messager.alert("信息","新密码不能为空，请重新填写完整","info");
-            return ;
+        }else if(originalAdminPwd.length<6){
+            $.messager.alert("信息","原始密码的位数不能小于6位");
+            return;
+        }else if(originalAdminPwd.length>16){
+            $.messager.alert("信息","原始密码的位数不能大于16位");
+            return;
+        } else if(newAdminPwd =="") {
+            $.messager.alert("信息", "新密码不能为空，请重新填写完整", "info");
+            return;
+        }else if(newAdminPwd.length<6){
+            $.messager.alert("信息","原始密码的位数不能小于6位");
+            return;
+        }else if(newAdminPwd.length>16){
+            $.messager.alert("信息","新密码的位数不能大于16位");
+            return;
         }
+
+        $.messager.confirm("确认", "尊敬的“"+adminRealName+",您确认修改密码吗？", function (r) {
+            if (r) {
+                $.post("/htm/base/adminUpdatePwd.action", {
+                        adminId: adminId,
+                        adminRealName:adminRealName,
+                        originalAdminPwd:originalAdminPwd,
+                        newAdminPwd:newAdminPwd
+                    }, function (data) {
+                    if (data.status) {
+                        $.messager.alert("信息", "修改密码信息成功！", "info", function () {
+                        });
+                    } else {
+                        var message = "修改密码失败！";
+                        if (data.message != null) {
+                            message = data.message;
+                        }
+                        $.messager.alert("信息", message, "error");
+                    }
+                }, "json");
+            }
+        });
+
+
     }
 
 </script>

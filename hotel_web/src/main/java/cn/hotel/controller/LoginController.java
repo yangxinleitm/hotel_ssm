@@ -58,6 +58,7 @@ public class LoginController extends BaseController{
 
                     //登录成功，把结果放在session中
                     session.setAttribute("admin",model);
+                    session.setAttribute("adminId",model.getAdminId());
                     jsonModel.setStatus(true);
                     jsonModel.setMessage("成功");
                     jsonModel.setResult(model);
