@@ -47,8 +47,9 @@
         <input type="checkbox" name ="group-3" id="group-3">
         <label for="group-3"  style="font-size: 13px;">酒店财务管理</label>
         <ul>
-            <li><a href="/htm/fiance/dishFee.action"  target="main"  style="font-size: 12px;">用餐消费</a></li>
-            <li><a href="/htm/fiance/customerRoomFee.action"  target="main"  style="font-size: 12px;">客房消费</a></li>
+            <li><a href="/htm/fee/customerOrderDetail.action"  target="main"  style="font-size: 12px;">订单交易明细</a></li>
+            <li><a href="/htm/fee/customerFoodFee.action"  target="main"  style="font-size: 12px;">用餐消费记录</a></li>
+            <li><a href="/htm/fee/customerRoomFee.action"  target="main"  style="font-size: 12px;">客房消费记录</a></li>
         </ul>
     </li>
 
@@ -58,7 +59,6 @@
         <label for="group-4"  style="font-size: 13px;">基础设施配置</label>
         <ul>
             <li><a href="/htm/base/updatePwd.action"  target="main"  style="font-size: 12px;">修改密码</a></li>
-            <li><a href="/admin/adminUser/logout.action"  target="main"  style="font-size: 12px;">退出</a></li>
         </ul>
     </li>
 

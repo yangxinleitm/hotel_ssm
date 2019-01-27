@@ -1,8 +1,8 @@
-package cn.hotel.entity;
+package cn.hotel.entity.model;
 
 import java.io.Serializable;
 
-public class CustomerOrder implements Serializable {
+public class CustomerOrderRequest implements Serializable {
     private Long orderId;
 
     private String orderNo;
@@ -22,6 +22,46 @@ public class CustomerOrder implements Serializable {
     private Long orderTime;
 
     private String remark;
+
+    private Long pageNumber;
+
+    private Long pageSize;
+
+    private Long orderTimeStart;
+
+    private Long orderTimeEnd;
+
+    public Long getOrderTimeStart() {
+        return orderTimeStart;
+    }
+
+    public void setOrderTimeStart(Long orderTimeStart) {
+        this.orderTimeStart = orderTimeStart;
+    }
+
+    public Long getOrderTimeEnd() {
+        return orderTimeEnd;
+    }
+
+    public void setOrderTimeEnd(Long orderTimeEnd) {
+        this.orderTimeEnd = orderTimeEnd;
+    }
+
+    public Long getPageNumber() {
+        return pageNumber;
+    }
+
+    public void setPageNumber(Long pageNumber) {
+        this.pageNumber = pageNumber;
+    }
+
+    public Long getPageSize() {
+        return pageSize;
+    }
+
+    public void setPageSize(Long pageSize) {
+        this.pageSize = pageSize;
+    }
 
     public Long getOrderId() {
         return orderId;

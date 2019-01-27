@@ -114,52 +114,52 @@ public class CustomerOrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdEqualTo(Integer value) {
+        public Criteria andOrderIdEqualTo(Long value) {
             addCriterion("order_id =", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotEqualTo(Integer value) {
+        public Criteria andOrderIdNotEqualTo(Long value) {
             addCriterion("order_id <>", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThan(Integer value) {
+        public Criteria andOrderIdGreaterThan(Long value) {
             addCriterion("order_id >", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThanOrEqualTo(Integer value) {
+        public Criteria andOrderIdGreaterThanOrEqualTo(Long value) {
             addCriterion("order_id >=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThan(Integer value) {
+        public Criteria andOrderIdLessThan(Long value) {
             addCriterion("order_id <", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThanOrEqualTo(Integer value) {
+        public Criteria andOrderIdLessThanOrEqualTo(Long value) {
             addCriterion("order_id <=", value, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIn(List<Integer> values) {
+        public Criteria andOrderIdIn(List<Long> values) {
             addCriterion("order_id in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotIn(List<Integer> values) {
+        public Criteria andOrderIdNotIn(List<Long> values) {
             addCriterion("order_id not in", values, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdBetween(Integer value1, Integer value2) {
+        public Criteria andOrderIdBetween(Long value1, Long value2) {
             addCriterion("order_id between", value1, value2, "orderId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotBetween(Integer value1, Integer value2) {
+        public Criteria andOrderIdNotBetween(Long value1, Long value2) {
             addCriterion("order_id not between", value1, value2, "orderId");
             return (Criteria) this;
         }
@@ -231,6 +231,76 @@ public class CustomerOrderExample {
 
         public Criteria andOrderNoNotBetween(String value1, String value2) {
             addCriterion("order_no not between", value1, value2, "orderNo");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdIsNull() {
+            addCriterion("food_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdIsNotNull() {
+            addCriterion("food_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdEqualTo(String value) {
+            addCriterion("food_id =", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdNotEqualTo(String value) {
+            addCriterion("food_id <>", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdGreaterThan(String value) {
+            addCriterion("food_id >", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdGreaterThanOrEqualTo(String value) {
+            addCriterion("food_id >=", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdLessThan(String value) {
+            addCriterion("food_id <", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdLessThanOrEqualTo(String value) {
+            addCriterion("food_id <=", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdLike(String value) {
+            addCriterion("food_id like", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdNotLike(String value) {
+            addCriterion("food_id not like", value, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdIn(List<String> values) {
+            addCriterion("food_id in", values, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdNotIn(List<String> values) {
+            addCriterion("food_id not in", values, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdBetween(String value1, String value2) {
+            addCriterion("food_id between", value1, value2, "foodId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFoodIdNotBetween(String value1, String value2) {
+            addCriterion("food_id not between", value1, value2, "foodId");
             return (Criteria) this;
         }
 
@@ -351,6 +421,66 @@ public class CustomerOrderExample {
 
         public Criteria andUserIdNotBetween(Long value1, Long value2) {
             addCriterion("user_id not between", value1, value2, "userId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdIsNull() {
+            addCriterion("journal_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdIsNotNull() {
+            addCriterion("journal_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdEqualTo(Long value) {
+            addCriterion("journal_id =", value, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdNotEqualTo(Long value) {
+            addCriterion("journal_id <>", value, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdGreaterThan(Long value) {
+            addCriterion("journal_id >", value, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("journal_id >=", value, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdLessThan(Long value) {
+            addCriterion("journal_id <", value, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdLessThanOrEqualTo(Long value) {
+            addCriterion("journal_id <=", value, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdIn(List<Long> values) {
+            addCriterion("journal_id in", values, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdNotIn(List<Long> values) {
+            addCriterion("journal_id not in", values, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdBetween(Long value1, Long value2) {
+            addCriterion("journal_id between", value1, value2, "journalId");
+            return (Criteria) this;
+        }
+
+        public Criteria andJournalIdNotBetween(Long value1, Long value2) {
+            addCriterion("journal_id not between", value1, value2, "journalId");
             return (Criteria) this;
         }
 

@@ -3,6 +3,7 @@ package cn.hotel.service.impl;
 import cn.hotel.business.CustomerOrderMapper;
 import cn.hotel.entity.CustomerOrder;
 import cn.hotel.entity.CustomerOrderExample;
+import cn.hotel.entity.model.CustomerOrderRequest;
 import cn.hotel.service.CustomerOrderService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +42,16 @@ public class CustomerOrderImpl implements CustomerOrderService {
         return 0;
     }
 
+
+    //多条件查询
     @Override
-    public List <CustomerOrder> selectByExample(CustomerOrder customerOrder) {
+    public List <CustomerOrder> selectAllCustomerOrder(CustomerOrderRequest customerOrderRequest) {
+        List <CustomerOrder> customerOrders = customerOrderMapper.selectAllCustomerOrder(customerOrderRequest);
+        return customerOrders;
+    }
+
+    @Override
+    public List <CustomerOrder> selectByExample(CustomerOrderRequest customerOrder) {
         CustomerOrderExample customerOrderExample = new CustomerOrderExample();
         CustomerOrderExample.Criteria criteria = customerOrderExample.createCriteria();
 

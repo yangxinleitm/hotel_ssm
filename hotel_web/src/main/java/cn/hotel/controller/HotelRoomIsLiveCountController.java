@@ -107,7 +107,7 @@ public class HotelRoomIsLiveCountController {
                 list.add(info);
             }
         }else if(param.get("userId")==null && param.get("roomId")!=null){
-            CustomerOrder customerOrder = new CustomerOrder();
+         /*   CustomerOrder customerOrder = new CustomerOrder();
             customerOrder.setRoomId(Integer.valueOf(param.get("roomId").toString()));
             List <CustomerOrder> customerOrders = orderService.selectByExample(customerOrder);
             CustomerDto customerDto = new CustomerDto();
@@ -147,7 +147,7 @@ public class HotelRoomIsLiveCountController {
                     }
                 }
             }
-
+*/
         }
         pager.setPageData(list);
         pager.setTotal(Long.valueOf(list.size()));
@@ -191,10 +191,6 @@ public class HotelRoomIsLiveCountController {
         return param;
     }
 
-    public static void main(String[] args){
-        UUID uuid = UUID.randomUUID();
-        System.out.println(uuid);
-    }
 
 }
 

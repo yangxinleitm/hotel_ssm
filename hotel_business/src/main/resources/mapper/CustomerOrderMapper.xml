@@ -2,15 +2,44 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.hotel.business.CustomerOrderMapper" >
   <resultMap id="BaseResultMap" type="cn.hotel.entity.CustomerOrder" >
-    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <id column="order_id" property="orderId" jdbcType="BIGINT" />
     <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="food_id" property="foodId" jdbcType="VARCHAR" />
     <result column="room_id" property="roomId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="BIGINT" />
+    <result column="journal_id" property="journalId" jdbcType="BIGINT" />
     <result column="order_detail" property="orderDetail" jdbcType="VARCHAR" />
     <result column="is_delete" property="isDelete" jdbcType="INTEGER" />
     <result column="order_time" property="orderTime" jdbcType="BIGINT" />
     <result column="remark" property="remark" jdbcType="VARCHAR" />
   </resultMap>
+
+
+  <sql id="whereParam">
+    <if test="orderId !=null ">
+      AND order_id = #{orderId}
+    </if>
+    <if test="userId !=null">
+      AND user_id = #{userId}
+    </if>
+    <if test="journalId !=null">
+      AND journal_id = #{journalId}
+    </if>
+    <if test="orderTime != null" >
+      AND order_time &gt;= #{orderTime,jdbcType=BIGINT}
+    </if>
+  </sql>
+
+  <select id="selectAllCustomerOrder" resultMap="BaseResultMap" parameterType="cn.hotel.entity.CustomerOrder">
+    SELECT *FROM customer_order
+    ORDER BY order_id ASC
+    <where>
+      <include refid="whereParam"/>
+    </where>
+    limit #{pageNumber},#{pageSize}
+  </select>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -70,7 +99,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    order_id, order_no, room_id, user_id, order_detail, is_delete, order_time, remark
+    order_id, order_no, food_id, room_id, user_id, journal_id, order_detail, is_delete,
+    order_time, remark
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.hotel.entity.CustomerOrderExample" >
     select
@@ -86,15 +116,15 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
     <include refid="Base_Column_List" />
     from customer_order
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from customer_order
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="cn.hotel.entity.CustomerOrderExample" >
     delete from customer_order
@@ -103,12 +133,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="cn.hotel.entity.CustomerOrder" >
-    insert into customer_order (order_id, order_no, room_id, 
-      user_id, order_detail, is_delete, 
-      order_time, remark)
-    values (#{orderId,jdbcType=INTEGER}, #{orderNo,jdbcType=VARCHAR}, #{roomId,jdbcType=INTEGER}, 
-      #{userId,jdbcType=BIGINT}, #{orderDetail,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, 
-      #{orderTime,jdbcType=BIGINT}, #{remark,jdbcType=VARCHAR})
+    insert into customer_order (order_id, order_no, food_id,
+      room_id, user_id, journal_id,
+      order_detail, is_delete, order_time,
+      remark)
+    values (#{orderId,jdbcType=BIGINT}, #{orderNo,jdbcType=VARCHAR}, #{foodId,jdbcType=VARCHAR},
+      #{roomId,jdbcType=INTEGER}, #{userId,jdbcType=BIGINT}, #{journalId,jdbcType=BIGINT},
+      #{orderDetail,jdbcType=VARCHAR}, #{isDelete,jdbcType=INTEGER}, #{orderTime,jdbcType=BIGINT},
+      #{remark,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="cn.hotel.entity.CustomerOrder" >
     insert into customer_order
@@ -119,11 +151,17 @@
       <if test="orderNo != null" >
         order_no,
       </if>
+      <if test="foodId != null" >
+        food_id,
+      </if>
       <if test="roomId != null" >
         room_id,
       </if>
       <if test="userId != null" >
         user_id,
+      </if>
+      <if test="journalId != null" >
+        journal_id,
       </if>
       <if test="orderDetail != null" >
         order_detail,
@@ -140,16 +178,22 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="orderId != null" >
-        #{orderId,jdbcType=INTEGER},
+        #{orderId,jdbcType=BIGINT},
       </if>
       <if test="orderNo != null" >
         #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="foodId != null" >
+        #{foodId,jdbcType=VARCHAR},
       </if>
       <if test="roomId != null" >
         #{roomId,jdbcType=INTEGER},
       </if>
       <if test="userId != null" >
         #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="journalId != null" >
+        #{journalId,jdbcType=BIGINT},
       </if>
       <if test="orderDetail != null" >
         #{orderDetail,jdbcType=VARCHAR},
@@ -175,16 +219,22 @@
     update customer_order
     <set >
       <if test="record.orderId != null" >
-        order_id = #{record.orderId,jdbcType=INTEGER},
+        order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
       <if test="record.orderNo != null" >
         order_no = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.foodId != null" >
+        food_id = #{record.foodId,jdbcType=VARCHAR},
       </if>
       <if test="record.roomId != null" >
         room_id = #{record.roomId,jdbcType=INTEGER},
       </if>
       <if test="record.userId != null" >
         user_id = #{record.userId,jdbcType=BIGINT},
+      </if>
+      <if test="record.journalId != null" >
+        journal_id = #{record.journalId,jdbcType=BIGINT},
       </if>
       <if test="record.orderDetail != null" >
         order_detail = #{record.orderDetail,jdbcType=VARCHAR},
@@ -205,14 +255,16 @@
   </update>
   <update id="updateByExample" parameterType="map" >
     update customer_order
-    set order_id = #{record.orderId,jdbcType=INTEGER},
-      order_no = #{record.orderNo,jdbcType=VARCHAR},
-      room_id = #{record.roomId,jdbcType=INTEGER},
-      user_id = #{record.userId,jdbcType=BIGINT},
-      order_detail = #{record.orderDetail,jdbcType=VARCHAR},
-      is_delete = #{record.isDelete,jdbcType=INTEGER},
-      order_time = #{record.orderTime,jdbcType=BIGINT},
-      remark = #{record.remark,jdbcType=VARCHAR}
+    set order_id = #{record.orderId,jdbcType=BIGINT},
+    order_no = #{record.orderNo,jdbcType=VARCHAR},
+    food_id = #{record.foodId,jdbcType=VARCHAR},
+    room_id = #{record.roomId,jdbcType=INTEGER},
+    user_id = #{record.userId,jdbcType=BIGINT},
+    journal_id = #{record.journalId,jdbcType=BIGINT},
+    order_detail = #{record.orderDetail,jdbcType=VARCHAR},
+    is_delete = #{record.isDelete,jdbcType=INTEGER},
+    order_time = #{record.orderTime,jdbcType=BIGINT},
+    remark = #{record.remark,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -223,11 +275,17 @@
       <if test="orderNo != null" >
         order_no = #{orderNo,jdbcType=VARCHAR},
       </if>
+      <if test="foodId != null" >
+        food_id = #{foodId,jdbcType=VARCHAR},
+      </if>
       <if test="roomId != null" >
         room_id = #{roomId,jdbcType=INTEGER},
       </if>
       <if test="userId != null" >
         user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="journalId != null" >
+        journal_id = #{journalId,jdbcType=BIGINT},
       </if>
       <if test="orderDetail != null" >
         order_detail = #{orderDetail,jdbcType=VARCHAR},
@@ -242,17 +300,19 @@
         remark = #{remark,jdbcType=VARCHAR},
       </if>
     </set>
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="cn.hotel.entity.CustomerOrder" >
     update customer_order
     set order_no = #{orderNo,jdbcType=VARCHAR},
+      food_id = #{foodId,jdbcType=VARCHAR},
       room_id = #{roomId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=BIGINT},
+      journal_id = #{journalId,jdbcType=BIGINT},
       order_detail = #{orderDetail,jdbcType=VARCHAR},
       is_delete = #{isDelete,jdbcType=INTEGER},
       order_time = #{orderTime,jdbcType=BIGINT},
       remark = #{remark,jdbcType=VARCHAR}
-    where order_id = #{orderId,jdbcType=INTEGER}
+    where order_id = #{orderId,jdbcType=BIGINT}
   </update>
 </mapper>

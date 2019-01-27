@@ -26,7 +26,6 @@ import java.util.List;
 * @Author:         田梦
 * @CreateDate:     2019/1/22 19:10
 
-
 */
 @Controller
 public class AdminUpdatePwdController extends BaseController{
@@ -139,8 +138,6 @@ public class AdminUpdatePwdController extends BaseController{
                 }
             }
         }
-
-
         return param;
     }
 

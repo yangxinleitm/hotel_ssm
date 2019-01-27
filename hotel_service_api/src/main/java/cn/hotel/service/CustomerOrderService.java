@@ -2,11 +2,13 @@ package cn.hotel.service;
 
 import cn.hotel.entity.CustomerOrder;
 import cn.hotel.entity.CustomerOrderExample;
+import cn.hotel.entity.model.CustomerOrderRequest;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface CustomerOrderService {
+
     int countByExample(CustomerOrderExample example);
 
     int deleteByExample(CustomerOrderExample example);
@@ -17,7 +19,8 @@ public interface CustomerOrderService {
 
     int insertSelective(CustomerOrder record);
 
-    List<CustomerOrder> selectByExample(CustomerOrder customerOrder);
+    List<CustomerOrder> selectAllCustomerOrder(CustomerOrderRequest customerOrderRequest);
+    List<CustomerOrder> selectByExample(CustomerOrderRequest customerOrderRequest);
 
     CustomerOrder selectByPrimaryKey(Integer orderId);
 
